@@ -34,7 +34,7 @@ require_once __DIR__ . '/includes/system/class-environment.php';
  * @since 1.0.0
  */
 function wppb_activate() {
-	//WPPluginBoilerplate\System\Activator::activate();
+	WPPluginBoilerplate\Plugin\Activator::activate();
 }
 
 /**
@@ -43,7 +43,7 @@ function wppb_activate() {
  * @since 1.0.0
  */
 function wppb_deactivate() {
-	//WPPluginBoilerplate\System\Deactivator::deactivate();
+	WPPluginBoilerplate\Plugin\Deactivator::deactivate();
 }
 
 /**
@@ -52,7 +52,7 @@ function wppb_deactivate() {
  * @since 1.0.0
  */
 function wppb_uninstall() {
-	//WPPluginBoilerplate\System\Uninstaller::uninstall();
+	WPPluginBoilerplate\Plugin\Uninstaller::uninstall();
 }
 
 /**
@@ -62,7 +62,7 @@ function wppb_uninstall() {
  */
 function wppb_run() {
 	WPPluginBoilerplate\System\Environment::init();
-	$plugin = new WPPluginBoilerplate\System\Core();
+	$plugin = new WPPluginBoilerplate\Plugin\Core();
 	$plugin->run();
 }
 

@@ -11,6 +11,7 @@ spl_autoload_register(
 	function( $class ) {
 		$classname = $class;
 		$filepath  = __DIR__;
+		error_log($class);
 		if ( strpos( 'WPPluginBoilerplate\\', $classname ) === 0 ) {
 			while ( strpos( '\\', $classname ) !== false ) {
 				$classname = substr( $classname, 0, strpos( '\\', $classname ) );
@@ -30,6 +31,9 @@ spl_autoload_register(
 				$filepath = WPPB_ADMIN_DIR;
 			}
 			$file = $filepath . 'class-' . $filename . '.php';
+
+			error_log($file);
+
 			if ( file_exists( $file ) ) {
 				require_once $file;
 			}
