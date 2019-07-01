@@ -30,7 +30,7 @@ class Wp_Plugin_Boilerplate_Public {
 	protected $assets;
 
 	/**
-	 * Initialize the class and set its properties.
+	 * Initializes the class and set its properties.
 	 *
 	 * @since 1.0.0
 	 */

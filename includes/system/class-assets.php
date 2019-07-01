@@ -19,7 +19,7 @@ namespace WPPluginBoilerplate\System;
 class Assets {
 
 	/**
-	 * Initialize the class and set its properties.
+	 * Initializes the class and set its properties.
 	 *
 	 * @since 1.0.0
 	 */
@@ -27,11 +27,11 @@ class Assets {
 	}
 
 	/**
-	 * Initialize the class and set its properties.
+	 * Echoes DNS prefetch.
 	 *
 	 * @since 1.0.0
 	 */
-	public static function prefetch() {
+	public function prefetch() {
 		if ( (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_use_cdn' ) && WPPB_CDN_AVAILABLE ) {
 			echo '<meta http-equiv="x-dns-prefetch-control" content="on">';
 			echo '<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />';
