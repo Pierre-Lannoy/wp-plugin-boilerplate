@@ -8,8 +8,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress plugin boilerplate
- * Plugin URI:        -
- * Description:       -
+ * Plugin URI:        --
+ * Description:       --
  * Version:           1.0.0
  * Author:            Pierre Lannoy
  * Author URI:        https://pierre.lannoy.fr
@@ -26,6 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 require_once __DIR__ . '/init.php';
 require_once __DIR__ . '/autoload.php';
+require_once __DIR__ . '/includes/libraries/autoload.php';
 require_once __DIR__ . '/includes/system/class-environment.php';
 
 /**
