@@ -27,6 +27,18 @@ class Assets {
 	}
 
 	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function prefetch() {
+		if ( (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_use_cdn' ) && WPPB_CDN_AVAILABLE ) {
+			echo '<meta http-equiv="x-dns-prefetch-control" content="on">';
+			echo '<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />';
+		}
+	}
+
+	/**
 	 * Registers (but don't enqueues) a style asset of the plugin.
 	 *
 	 * Regarding user's option, asset is ready to enqueue from local plugin dir or from CDN (jsDelivr)

@@ -115,6 +115,8 @@ class Core {
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 		add_shortcode('adr-sync', array( $plugin_public, 'synchronize' ));*/
+
+		$this->loader->add_action('wp_head', 'WPPluginBoilerplate\System\Assets', 'prefetch');
 	}
 
 	/**
