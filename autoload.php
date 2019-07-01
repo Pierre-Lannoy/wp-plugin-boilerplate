@@ -10,30 +10,26 @@
 spl_autoload_register(
 	function( $class ) {
 		$classname = $class;
-		$filepath  = __DIR__;
-		error_log($class);
-		if ( strpos( 'WPPluginBoilerplate\\', $classname ) === 0 ) {
-			while ( strpos( '\\', $classname ) !== false ) {
-				$classname = substr( $classname, 0, strpos( '\\', $classname ) );
+		$filepath  = __DIR__ . '/';
+		if ( strpos( $classname, 'WPPluginBoilerplate\\' ) === 0 ) {
+			while ( strpos( $classname, '\\' ) !== false ) {
+				$classname = substr( $classname, strpos( $classname, '\\' ) + 1, 1000 );
 			}
-			$filename = str_replace( '_', '-', strtolower( $classname ) );
-			if ( strpos( 'WPPluginBoilerplate\System\\', $classname ) === 0 ) {
+			$filename = 'class-' . str_replace( '_', '-', strtolower( $classname ) ) . '.php';
+			if ( strpos( $class, 'WPPluginBoilerplate\System\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'system/';
 			}
-			if ( strpos( 'WPPluginBoilerplate\Plugin\\', $classname ) === 0 ) {
+			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
 			}
 
-			if ( strpos( '-public', $classname ) !== false ) {
+			if ( strpos( $classname, '-public' ) !== false ) {
 				$filepath = WPPB_PUBLIC_DIR;
 			}
-			if ( strpos( '-admin', $classname ) !== false ) {
+			if ( strpos( $classname, '-admin' ) !== false ) {
 				$filepath = WPPB_ADMIN_DIR;
 			}
-			$file = $filepath . 'class-' . $filename . '.php';
-
-			error_log($file);
-
+			$file = $filepath . $filename;
 			if ( file_exists( $file ) ) {
 				require_once $file;
 			}
