@@ -33,7 +33,7 @@ class Assets {
 	 *
 	 * @param string      $handle Name of the stylesheet. Should be unique.
 	 * @param string|bool $src    Full path of the stylesheet, or path of the stylesheet relative to the WordPress root directory.
-	 *                            If source is set to false, stylesheet is an alias of other stylesheets it depends on.
+	 *                            If $src is set to false, stylesheet is an alias of other stylesheets it depends on.
 	 * @param string      $file   The style file name.
 	 * @param array       $deps   Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
 	 * @param string      $media  Optional. The media for which this stylesheet has been defined.
@@ -62,7 +62,7 @@ class Assets {
 	 *
 	 * @param string      $handle Name of the script. Should be unique.
 	 * @param string|bool $src    Full path of the script, or path of the script relative to the WordPress root directory.
-	 *                            If source is set to false, script is an alias of other scripts it depends on.
+	 *                            If $src is set to false, script is an alias of other scripts it depends on.
 	 * @param string      $file   The style file name.
 	 * @param array       $deps   Optional. An array of registered script handles this script depends on. Default empty array.
 	 * @return bool Whether the script has been registered. True on success, false on failure.
