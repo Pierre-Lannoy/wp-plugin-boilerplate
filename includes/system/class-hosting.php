@@ -52,11 +52,11 @@ class Hosting {
 	 * @since 1.0.0
 	 */
 	public static function count_server_cpu() {
-		$cpu_count = get_transient( 'wppb_cpu_count' );
+		$cpu_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_cpu_count' );
 		if ( false === $cpu_count ) {
 			if ( self::is_shell_enabled() ) {
 				$cpu_count = shell_exec( 'cat /proc/cpuinfo |grep "physical id" | sort | uniq | wc -l' );
-				set_transient( 'wppb_cpu_count', $cpu_count, HOUR_IN_SECONDS );
+				set_transient( WPPB_PRODUCT_ABBREVIATION . '_cpu_count', $cpu_count, HOUR_IN_SECONDS );
 			} else {
 				return false;
 			}
@@ -71,11 +71,11 @@ class Hosting {
 	 * @since 1.0.0
 	 */
 	public static function count_server_core() {
-		$core_count = get_transient( 'wppb_core_count' );
+		$core_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_core_count' );
 		if ( false === $core_count ) {
 			if ( self::is_shell_enabled() ) {
 				$core_count = shell_exec( "echo \"$((`cat /proc/cpuinfo | grep cores | grep -o '[0-9]' | uniq` * `cat /proc/cpuinfo |grep 'physical id' | sort | uniq | wc -l`))\"" );
-				set_transient( 'wppb_core_count', $core_count, HOUR_IN_SECONDS );
+				set_transient( WPPB_PRODUCT_ABBREVIATION . '_core_count', $core_count, HOUR_IN_SECONDS );
 			} else {
 				return false;
 			}

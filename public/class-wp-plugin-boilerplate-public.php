@@ -9,6 +9,8 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
+use WPPluginBoilerplate\System\Assets;
+
 /**
  * The class responsible for the public-facing functionality of the plugin.
  *
@@ -19,11 +21,21 @@ namespace WPPluginBoilerplate\Plugin;
 class Wp_Plugin_Boilerplate_Public {
 
 	/**
+	 * The assets manager that's responsible for handling all assets of the plugin.
+	 *
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    Assets    $assets    The plugin assets manager.
+	 */
+	protected $assets;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$this->assets = new Assets();
 	}
 
 	/**
@@ -32,7 +44,7 @@ class Wp_Plugin_Boilerplate_Public {
 	 * @since 1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( WPPB_ASSETS_ID, WPPB_PUBLIC_URL . 'css/wp-plugin-boilerplate.min.css', array(), WPPB_VERSION, 'all' );
+		$this->assets->register_style( WPPB_ASSETS_ID, WPPB_PUBLIC_URL, 'css/wp-plugin-boilerplate.min.css' );
 	}
 
 	/**
@@ -41,7 +53,7 @@ class Wp_Plugin_Boilerplate_Public {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( WPPB_ASSETS_ID, WPPB_PUBLIC_URL . 'js/wp-plugin-boilerplate.min.js', array( 'jquery' ), WPPB_VERSION, false );
+		$this->assets->register_script( WPPB_ASSETS_ID, WPPB_PUBLIC_URL, 'js/wp-plugin-boilerplate.min.js', array( 'jquery' ) );
 	}
 
 }

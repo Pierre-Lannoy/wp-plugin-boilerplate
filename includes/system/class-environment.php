@@ -48,6 +48,7 @@ class Environment {
 		define( 'WPPB_AJAX_RELATIVE_URL', self::ajax_relative_url() );
 		define( 'WPPB_PLUGIN_SIGNATURE', WPPB_PRODUCT_NAME . ' v' . WPPB_VERSION );
 		define( 'WPPB_PLUGIN_AGENT', WPPB_PRODUCT_NAME . ' (' . self::wordpress_version_id() . '; ' . self::plugin_version_id() . '; +' . WPPB_PRODUCT_URL . ')' );
+		define( 'WPPB_ASSETS_ID', WPPB_PRODUCT_ABBREVIATION . '-assets' );
 	}
 
 	/**
