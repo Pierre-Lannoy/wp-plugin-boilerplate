@@ -6,8 +6,7 @@
  *
  * @since 1.0.0
  *
- * @package    Adr_Sync
- * @subpackage Adr_Sync/public/partials
+ * @package    Plugin
  */
 
 ?>
