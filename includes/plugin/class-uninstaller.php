@@ -20,7 +20,6 @@ namespace WPPluginBoilerplate\Plugin;
  */
 class Uninstaller {
 
-
 	/**
 	 * Delete the plugin.
 	 *

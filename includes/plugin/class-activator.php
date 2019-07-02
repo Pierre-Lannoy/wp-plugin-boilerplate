@@ -20,7 +20,6 @@ namespace WPPluginBoilerplate\Plugin;
  */
 class Activator {
 
-
 	/**
 	 * Activate the plugin.
 	 *

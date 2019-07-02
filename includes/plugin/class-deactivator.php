@@ -20,7 +20,6 @@ namespace WPPluginBoilerplate\Plugin;
  */
 class Deactivator {
 
-
 	/**
 	 * Deactivate the plugin.
 	 *

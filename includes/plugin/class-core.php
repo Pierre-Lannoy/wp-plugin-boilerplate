@@ -12,6 +12,7 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
+use WPPluginBoilerplate\Plugin\Wp_Plugin_Boilerplate_Public;
 use WPPluginBoilerplate\System\Loader;
 use WPPluginBoilerplate\System\I18n;
 use WPPluginBoilerplate\System\Assets;
@@ -75,19 +76,10 @@ class Core {
 	 * @access private
 	 */
 	private function define_global_hooks() {
-		/*
-		if (! wp_next_scheduled(ADRS_CRON_NAME) ) {
-			wp_schedule_event(time(), get_option('adr_frequency', 'daily'), ADRS_CRON_NAME);
-		}
-		$plugin_cpt = new Adr_Sync_Cpt($this->get_adr_sync(), $this->get_version());
-		$this->loader->add_action('init', $plugin_cpt, 'register_adr_post_type');
-		$this->loader->add_action('wp_insert_post_data', $plugin_cpt, 'default_comments_on');
-		$job = new Adr_Sync_Job($this->get_adr_sync(), $this->get_version());
-		$this->loader->add_action(ADRS_CRON_NAME, $job, 'silent_synchronization');*/
-
 		$assets = new Assets();
-
 		$this->loader->add_action('wp_head', $assets, 'prefetch');
+
+
 	}
 
 	/**
@@ -115,11 +107,9 @@ class Core {
 	 * @access private
 	 */
 	private function define_public_hooks() {
-		/*
-		$plugin_public = new Adr_Sync_Public($this->get_adr_sync(), $this->get_version());
+		$plugin_public = new Wp_Plugin_Boilerplate_Public();
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-		add_shortcode('adr-sync', array( $plugin_public, 'synchronize' ));*/
 	}
 
 	/**
