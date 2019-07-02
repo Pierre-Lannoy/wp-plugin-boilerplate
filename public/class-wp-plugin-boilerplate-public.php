@@ -14,7 +14,7 @@ use WPPluginBoilerplate\System\Assets;
 /**
  * The class responsible for the public-facing functionality of the plugin.
  *
- * @package plugin
+ * @package Plugin
  * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since 1.0.0
  */

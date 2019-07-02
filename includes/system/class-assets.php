@@ -2,7 +2,7 @@
 /**
  * Plugin assets handling.
  *
- * @package system
+ * @package System
  * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since 1.0.0
  */
@@ -12,7 +12,7 @@ namespace WPPluginBoilerplate\System;
 /**
  * The class responsible to handle assets management.
  *
- * @package system
+ * @package System
  * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since 1.0.0
  */

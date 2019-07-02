@@ -22,7 +22,6 @@ spl_autoload_register(
 			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
 			}
-
 			if ( strpos( $filename, '-public' ) !== false ) {
 				$filepath = WPPB_PUBLIC_DIR;
 			}

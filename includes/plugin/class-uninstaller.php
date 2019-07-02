@@ -27,7 +27,7 @@ class Uninstaller {
 	 */
 	public static function uninstall() {
 		// Remove options.
-		// Delete transient?
+		// Delete cache?
 	}
 
 }
