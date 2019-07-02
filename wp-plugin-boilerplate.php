@@ -53,7 +53,7 @@ function wppb_deactivate() {
  * @since 1.0.0
  */
 function wppb_uninstall() {
-	 WPPluginBoilerplate\Plugin\Uninstaller::uninstall();
+	WPPluginBoilerplate\Plugin\Uninstaller::uninstall();
 }
 
 /**

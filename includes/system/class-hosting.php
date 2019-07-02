@@ -35,6 +35,7 @@ class Hosting {
 	 */
 	private static function is_shell_enabled() {
 		if ( function_exists( 'shell_exec' ) && ! in_array( 'shell_exec', array_map( 'trim', explode( ', ', ini_get( 'disable_functions' ) ) ), true ) && (int) strtolower( ini_get( 'safe_mode' ) ) !== 1 ) {
+			// phpcs:ignore
 			$return = shell_exec( 'cat /proc/cpuinfo' );
 			if ( ! empty( $return ) ) {
 				return true;
@@ -56,6 +57,7 @@ class Hosting {
 		$cpu_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_cpu_count' );
 		if ( false === $cpu_count ) {
 			if ( self::is_shell_enabled() ) {
+				// phpcs:ignore
 				$cpu_count = shell_exec( 'cat /proc/cpuinfo |grep "physical id" | sort | uniq | wc -l' );
 				set_transient( WPPB_PRODUCT_ABBREVIATION . '_cpu_count', $cpu_count, HOUR_IN_SECONDS );
 			} else {
@@ -75,6 +77,7 @@ class Hosting {
 		$core_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_core_count' );
 		if ( false === $core_count ) {
 			if ( self::is_shell_enabled() ) {
+				// phpcs:ignore
 				$core_count = shell_exec( "echo \"$((`cat /proc/cpuinfo | grep cores | grep -o '[0-9]' | uniq` * `cat /proc/cpuinfo |grep 'physical id' | sort | uniq | wc -l`))\"" );
 				set_transient( WPPB_PRODUCT_ABBREVIATION . '_core_count', $core_count, HOUR_IN_SECONDS );
 			} else {

@@ -62,6 +62,7 @@ class Assets {
 			} else {
 				$file = 'https://cdn.jsdelivr.net/wp/' . WPPB_SLUG . '/tags/' . WPPB_VERSION . '/public/' . $file;
 			}
+			// phpcs:ignore
 			return wp_register_style( $handle, $file, $deps, null, $media );
 		} else {
 			return wp_register_style( $handle, $src . $file, $deps, WPPB_VERSION, $media );
@@ -88,6 +89,7 @@ class Assets {
 			} else {
 				$file = 'https://cdn.jsdelivr.net/wp/' . WPPB_SLUG . '/tags/' . WPPB_VERSION . '/public/' . $file;
 			}
+			// phpcs:ignore
 			return wp_register_script( $handle, $file, $deps, null, (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_script_in_footer' ) );
 		} else {
 			return wp_register_script( $handle, $src . $file, $deps, WPPB_VERSION, (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_script_in_footer' ) );

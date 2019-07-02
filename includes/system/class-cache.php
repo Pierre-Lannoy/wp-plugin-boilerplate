@@ -170,8 +170,10 @@ class Cache {
 		global $wpdb;
 		$result = 0;
 		if ( strlen( $item_name ) - 1 === strpos( $item_name, '/*' ) && '/' === $item_name[0] ) {
+			// phpcs:ignore
 			$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name = '_transient_timeout_" . self::full_item_name( str_replace( '/*', '', $item_name ) ) . "' OR option_name LIKE '_transient_timeout_" . self::full_item_name( str_replace( '/*', '/%', $item_name ) ) . "';" );
 		} else {
+			// phpcs:ignore
 			$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name = '_transient_timeout_" . self::full_item_name( $item_name ) . "';" );
 		}
 		foreach ( $delete as $transient ) {
