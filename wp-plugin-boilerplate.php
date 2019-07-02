@@ -25,9 +25,9 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once __DIR__ . '/init.php';
+require_once __DIR__ . '/includes/system/class-environment.php';
 require_once __DIR__ . '/autoload.php';
 require_once __DIR__ . '/includes/libraries/autoload.php';
-require_once __DIR__ . '/includes/system/class-environment.php';
 
 /**
  * The code that runs during plugin activation.
@@ -62,7 +62,7 @@ function wppb_uninstall() {
  * @since 1.0.0
  */
 function wppb_run() {
-	WPPluginBoilerplate\System\Environment::init();
+	WPPluginBoilerplate\System\Cache::init();
 	$plugin = new WPPluginBoilerplate\Plugin\Core();
 	$plugin->run();
 }

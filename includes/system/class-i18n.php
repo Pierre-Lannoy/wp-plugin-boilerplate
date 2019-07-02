@@ -25,6 +25,14 @@ namespace WPPluginBoilerplate\System;
 class I18n {
 
 	/**
+	 * Initializes the class and set its properties.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+	}
+
+	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since 1.0.0

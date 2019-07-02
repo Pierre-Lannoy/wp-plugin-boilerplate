@@ -355,3 +355,5 @@ class Environment {
 		return ( substr( $url, 0 ) === '/' ? '' : '/' ) . $url . ( substr( $url, -1 ) === '/' ? '' : '/' ) . 'admin.php';
 	}
 }
+
+Environment::init();
