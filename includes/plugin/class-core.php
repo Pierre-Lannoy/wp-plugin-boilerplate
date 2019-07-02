@@ -89,13 +89,11 @@ class Core {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
-		/*
-		$plugin_admin = new Adr_Sync_Admin($this->get_adr_sync(), $this->get_version());
+		$plugin_admin = new Wp_Plugin_Boilerplate_Admin();
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 		$this->loader->add_action('admin_menu', $plugin_admin, 'init_admin_menus');
 		$this->loader->add_action('admin_init', $plugin_admin, 'init_settings_sections');
-		$this->loader->add_action('dashboard_glance_items', $plugin_admin, 'add_wp_glance_items');*/
 	}
 
 	/**

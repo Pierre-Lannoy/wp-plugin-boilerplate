@@ -4,9 +4,9 @@
  *
  * This file is used to markup the public-facing aspects of the plugin.
  *
- * @since 1.0.0
- *
  * @package    Plugin
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 ?>
