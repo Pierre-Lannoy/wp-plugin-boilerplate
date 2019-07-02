@@ -3,8 +3,8 @@
  * Initialization of globals.
  *
  * @package Bootstrap
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 define( 'WPPB_PRODUCT_NAME', 'WordPress Plugin Boilerplate' );

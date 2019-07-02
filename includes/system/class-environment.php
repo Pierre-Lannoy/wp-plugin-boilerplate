@@ -3,8 +3,8 @@
  * Plugin environment handling.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\System;
@@ -13,10 +13,11 @@ namespace WPPluginBoilerplate\System;
  * The class responsible to manage and detect plugin environment.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Environment {
+
 
 	/**
 	 * Initializes the class and set its properties.
@@ -54,9 +55,9 @@ class Environment {
 	/**
 	 * Get the major version number.
 	 *
-	 * @param string $version Optional. The full version string.
+	 * @param  string $version Optional. The full version string.
 	 * @return string The major version number.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public static function major_version( $version = WPPB_VERSION ) {
 		try {
@@ -70,9 +71,9 @@ class Environment {
 	/**
 	 * Get the major version number.
 	 *
-	 * @param string $version Optional. The full version string.
+	 * @param  string $version Optional. The full version string.
 	 * @return string The major version number.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public static function minor_version( $version = WPPB_VERSION ) {
 		try {
@@ -87,9 +88,9 @@ class Environment {
 	/**
 	 * Get the major version number.
 	 *
-	 * @param string $version Optional. The full version string.
+	 * @param  string $version Optional. The full version string.
 	 * @return string The major version number.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
 	public static function patch_version( $version = WPPB_VERSION ) {
 		try {
@@ -107,8 +108,8 @@ class Environment {
 	/**
 	 * Verification of WP version.
 	 *
-	 * @return  boolean     True if version is ok, false otherwise.
-	 * @since 1.0.0
+	 * @return boolean     True if version is ok, false otherwise.
+	 * @since  1.0.0
 	 */
 	public static function is_wordpress_version_ok() {
 		global $wp_version;
@@ -118,8 +119,8 @@ class Environment {
 	/**
 	 * Get the WordPress version ID.
 	 *
-	 * @return  string  The WordPress version ID.
-	 * @since 1.0.0
+	 * @return string  The WordPress version ID.
+	 * @since  1.0.0
 	 */
 	public static function wordpress_version_id() {
 		global $wp_version;
@@ -129,8 +130,8 @@ class Environment {
 	/**
 	 * Get the WordPress version Text.
 	 *
-	 * @return  string  The WordPress version in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The WordPress version in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function wordpress_version_text() {
 		global $wp_version;
@@ -144,8 +145,8 @@ class Environment {
 	/**
 	 * Get the WordPress debug status.
 	 *
-	 * @return  string  The WordPress debug status in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The WordPress debug status in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function wordpress_debug_text() {
 		$debug = false;
@@ -173,8 +174,8 @@ class Environment {
 	/**
 	 * Get the plugin version ID.
 	 *
-	 * @return  string  The plugin version ID.
-	 * @since 1.0.0
+	 * @return string  The plugin version ID.
+	 * @since  1.0.0
 	 */
 	public static function plugin_version_id() {
 		return WPPB_PRODUCT_SHORTNAME . '/' . WPPB_VERSION;
@@ -183,11 +184,11 @@ class Environment {
 	/**
 	 * Get the plugin version text.
 	 *
-	 * @return  string  The plugin version in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The plugin version in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function plugin_version_text() {
-		$s = WPPB_PLUGIN_NAME . ' ' . WPPB_VERSION;
+		$s = WPPB_PRODUCT_NAME . ' ' . WPPB_VERSION;
 		if ( defined( 'WPPB_CODENAME' ) ) {
 			if ( WPPB_CODENAME !== '"-"' ) {
 				$s .= ' ' . WPPB_CODENAME;
@@ -199,8 +200,8 @@ class Environment {
 	/**
 	 * Is the plugin a development preview?
 	 *
-	 * @return  boolean True if it's a development preview, false otherwise.
-	 * @since 1.0.0
+	 * @return boolean True if it's a development preview, false otherwise.
+	 * @since  1.0.0
 	 */
 	public static function is_plugin_in_dev_mode() {
 		return ( strpos( WPPB_VERSION, 'dev' ) > 0 );
@@ -209,8 +210,8 @@ class Environment {
 	/**
 	 * Is the plugin a release candidate?
 	 *
-	 * @return  boolean True if it's a release candidate, false otherwise.
-	 * @since 1.0.0
+	 * @return boolean True if it's a release candidate, false otherwise.
+	 * @since  1.0.0
 	 */
 	public static function is_plugin_in_rc_mode() {
 		return ( strpos( WPPB_VERSION, 'rc' ) > 0 );
@@ -219,8 +220,8 @@ class Environment {
 	/**
 	 * Is the plugin production ready?
 	 *
-	 * @return  boolean True if it's production ready, false otherwise.
-	 * @since 1.0.0
+	 * @return boolean True if it's production ready, false otherwise.
+	 * @since  1.0.0
 	 */
 	public static function is_plugin_in_production_mode() {
 		return ( ! self::is_plugin_in_dev_mode() && ! self::is_plugin_in_rc_mode() );
@@ -229,8 +230,8 @@ class Environment {
 	/**
 	 * Verification of PHP version.
 	 *
-	 * @return  boolean     True if version is ok, false otherwise.
-	 * @since 1.0.0
+	 * @return boolean     True if version is ok, false otherwise.
+	 * @since  1.0.0
 	 */
 	public static function is_php_version_ok() {
 		return ( ! version_compare( PHP_VERSION, WPPB_MINIMUM_PHP_VERSION, '<' ) );
@@ -239,8 +240,8 @@ class Environment {
 	/**
 	 * Get the PHP version.
 	 *
-	 * @return  string  The PHP version.
-	 * @since 1.0.0
+	 * @return string  The PHP version.
+	 * @since  1.0.0
 	 */
 	public static function php_version() {
 		$s = phpversion();
@@ -253,8 +254,8 @@ class Environment {
 	/**
 	 * Get the PHP full version.
 	 *
-	 * @return  string  The PHP full version.
-	 * @since 1.0.0
+	 * @return string  The PHP full version.
+	 * @since  1.0.0
 	 */
 	public static function php_full_version() {
 		return phpversion();
@@ -263,8 +264,8 @@ class Environment {
 	/**
 	 * Get the PHP version text.
 	 *
-	 * @return  string  The PHP version in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The PHP version in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function php_version_text() {
 		return 'PHP ' . self::php_version();
@@ -273,8 +274,8 @@ class Environment {
 	/**
 	 * Get the PHP full version text.
 	 *
-	 * @return  string  The PHP full version in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The PHP full version in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function php_full_version_text() {
 		return 'PHP ' . self::php_full_version();
@@ -283,8 +284,8 @@ class Environment {
 	/**
 	 * Get the MYSQL version.
 	 *
-	 * @return  string  The MYSQL full version.
-	 * @since 1.0.0
+	 * @return string  The MYSQL full version.
+	 * @since  1.0.0
 	 */
 	public static function mysql_version() {
 		global $wpdb;
@@ -294,8 +295,8 @@ class Environment {
 	/**
 	 * Get the MYSQL version text.
 	 *
-	 * @return  string  The MYSQL version in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The MYSQL version in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function mysql_version_text() {
 		return 'MySQL ' . self::mysql_version();
@@ -304,8 +305,8 @@ class Environment {
 	/**
 	 * Get the database name and host.
 	 *
-	 * @return  string  The database name and host in human-readable text.
-	 * @since 1.0.0
+	 * @return string  The database name and host in human-readable text.
+	 * @since  1.0.0
 	 */
 	public static function mysql_name_text() {
 		return DB_NAME . '@' . DB_HOST;
@@ -314,8 +315,8 @@ class Environment {
 	/**
 	 * Get the database charset.
 	 *
-	 * @return  string  The charset text.
-	 * @since 1.0.0
+	 * @return string  The charset text.
+	 * @since  1.0.0
 	 */
 	public static function mysql_charset_text() {
 		return DB_CHARSET;
@@ -324,8 +325,8 @@ class Environment {
 	/**
 	 * Get the database user.
 	 *
-	 * @return  string  The user text.
-	 * @since 1.0.0
+	 * @return string  The user text.
+	 * @since  1.0.0
 	 */
 	public static function mysql_user_text() {
 		return DB_USER;
@@ -335,8 +336,8 @@ class Environment {
 	 * The detection of this url allows the plugin to make ajax calls when
 	 * the site has not a standard /wp-admin/ path.
 	 *
-	 * @return  string    The relative url for ajax calls.
-	 * @since 1.0.0
+	 * @return string    The relative url for ajax calls.
+	 * @since  1.0.0
 	 */
 	private static function ajax_relative_url() {
 		$url = preg_replace( '/(http[s]?:\/\/.*\/)/iU', '', get_admin_url(), 1 );
@@ -347,8 +348,8 @@ class Environment {
 	 * The detection of this url allows the plugin to be called from
 	 * WP dashboard when the site has not a standard /wp-admin/ path.
 	 *
-	 * @return  string    The relative url for WP admin.
-	 * @since 1.0.0
+	 * @return string    The relative url for WP admin.
+	 * @since  1.0.0
 	 */
 	private static function admin_relative_url() {
 		$url = preg_replace( '/(http[s]?:\/\/.*\/)/iU', '', get_admin_url(), 1 );

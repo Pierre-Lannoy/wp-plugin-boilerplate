@@ -3,12 +3,12 @@
  * Autoload for WordPress plugin boilerplate.
  *
  * @package Bootstrap
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 spl_autoload_register(
-	function( $class ) {
+	function ( $class ) {
 		$classname = $class;
 		$filepath  = __DIR__ . '/';
 		if ( strpos( $classname, 'WPPluginBoilerplate\\' ) === 0 ) {
@@ -30,7 +30,7 @@ spl_autoload_register(
 			}
 			$file = $filepath . $filename;
 			if ( file_exists( $file ) ) {
-				require_once $file;
+				include_once $file;
 			}
 		}
 	}

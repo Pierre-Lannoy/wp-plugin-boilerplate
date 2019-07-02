@@ -3,8 +3,8 @@
  * The public-facing functionality of the plugin.
  *
  * @package Plugin
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\Plugin;
@@ -15,10 +15,11 @@ use WPPluginBoilerplate\System\Assets;
  * The class responsible for the public-facing functionality of the plugin.
  *
  * @package Plugin
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Wp_Plugin_Boilerplate_Public {
+
 
 	/**
 	 * The assets manager that's responsible for handling all assets of the plugin.

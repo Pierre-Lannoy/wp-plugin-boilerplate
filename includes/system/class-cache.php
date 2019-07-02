@@ -3,8 +3,8 @@
  * Plugin cache handling.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\System;
@@ -13,10 +13,11 @@ namespace WPPluginBoilerplate\System;
  * The class responsible to handle cache management.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Cache {
+
 
 	/**
 	 * The pool's name, specific to the calling plugin.
@@ -87,29 +88,32 @@ class Cache {
 	 * @since 1.0.0
 	 */
 	public static function init() {
-		self::$ttls = array ( 'ephemeral' => -1, 'diagnosis' => 3600 );
+		self::$ttls = array(
+			'ephemeral' => -1,
+			'diagnosis' => 3600,
+		);
 	}
 
 	/**
 	 * Full item name.
 	 *
-	 * @param string $item_name Item name. Expected to not be SQL-escaped.
+	 * @param  string $item_name Item name. Expected to not be SQL-escaped.
 	 * @return string The full item name.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
-	private static function full_item_name($item_name) {
+	private static function full_item_name( $item_name ) {
 		$name = self::$pool_name . '_';
-		if (self::$blog_aware) {
+		if ( self::$blog_aware ) {
 			$name .= (string) get_current_blog_id() . '_';
 		}
-		if (self::$locale_aware) {
+		if ( self::$locale_aware ) {
 			$name .= (string) L10n::get_display_locale() . '_';
 		}
-		if (self::$user_aware) {
+		if ( self::$user_aware ) {
 			$name .= (string) User::get_current_user_id() . '_';
 		}
 		$name .= $item_name;
-		return substr(trim( $name), 0, 172 );
+		return substr( trim( $name ), 0, 172 );
 	}
 
 	/**
@@ -118,12 +122,12 @@ class Cache {
 	 * If the item does not exist, does not have a value, or has expired,
 	 * then the return value will be false.
 	 *
-	 * @param string $item_name Item name. Expected to not be SQL-escaped.
+	 * @param  string $item_name Item name. Expected to not be SQL-escaped.
 	 * @return mixed Value of item.
-	 * @since 1.0.0
+	 * @since  1.0.0
 	 */
-	public static function get($item_name) {
-		return get_transient(self::full_item_name($item_name));
+	public static function get( $item_name ) {
+		return get_transient( self::full_item_name( $item_name ) );
 	}
 
 }

@@ -3,8 +3,8 @@
  * Register all actions and filters for the plugin
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\System;
@@ -17,10 +17,11 @@ namespace WPPluginBoilerplate\System;
  * run function to execute the list of actions and filters.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Loader {
+
 
 	/**
 	 * The array of actions registered with WordPress.

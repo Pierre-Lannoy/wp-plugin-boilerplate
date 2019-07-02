@@ -6,13 +6,12 @@
  * public-facing side of the site and the admin area.
  *
  * @package Plugin
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\Plugin;
 
-use WPPluginBoilerplate\Plugin\Wp_Plugin_Boilerplate_Public;
 use WPPluginBoilerplate\System\Loader;
 use WPPluginBoilerplate\System\I18n;
 use WPPluginBoilerplate\System\Assets;
@@ -24,10 +23,11 @@ use WPPluginBoilerplate\System\Assets;
  * public-facing site hooks.
  *
  * @package Plugin
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Core {
+
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -77,8 +77,7 @@ class Core {
 	 */
 	private function define_global_hooks() {
 		$assets = new Assets();
-		$this->loader->add_action('wp_head', $assets, 'prefetch');
-
+		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
 
 	}
 
@@ -108,8 +107,8 @@ class Core {
 	 */
 	private function define_public_hooks() {
 		$plugin_public = new Wp_Plugin_Boilerplate_Public();
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 	}
 
 	/**

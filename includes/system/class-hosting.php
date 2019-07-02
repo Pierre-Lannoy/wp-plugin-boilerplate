@@ -3,8 +3,8 @@
  * Hosting environment handling.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\System;
@@ -13,10 +13,11 @@ namespace WPPluginBoilerplate\System;
  * The class responsible to manage and detect hosting environment.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class Hosting {
+
 
 	/**
 	 * Initializes the class and set its properties.
@@ -29,8 +30,8 @@ class Hosting {
 	/**
 	 * Check if the server config allows shell_exec().
 	 *
-	 * @return  bool    True if shell_exec() can be used, false otherwise.
-	 * @since 1.0.0
+	 * @return bool    True if shell_exec() can be used, false otherwise.
+	 * @since  1.0.0
 	 */
 	private static function is_shell_enabled() {
 		if ( function_exists( 'shell_exec' ) && ! in_array( 'shell_exec', array_map( 'trim', explode( ', ', ini_get( 'disable_functions' ) ) ), true ) && (int) strtolower( ini_get( 'safe_mode' ) ) !== 1 ) {
@@ -48,8 +49,8 @@ class Hosting {
 	/**
 	 * Get CPU count of the server.
 	 *
-	 * @return  int|bool    The count of CPUs, false if it's not countable.
-	 * @since 1.0.0
+	 * @return int|bool    The count of CPUs, false if it's not countable.
+	 * @since  1.0.0
 	 */
 	public static function count_server_cpu() {
 		$cpu_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_cpu_count' );
@@ -67,8 +68,8 @@ class Hosting {
 	/**
 	 * Get core count of the server.
 	 *
-	 * @return  int|bool    The count of cores, false if it's not countable.
-	 * @since 1.0.0
+	 * @return int|bool    The count of cores, false if it's not countable.
+	 * @since  1.0.0
 	 */
 	public static function count_server_core() {
 		$core_count = get_transient( WPPB_PRODUCT_ABBREVIATION . '_core_count' );

@@ -6,8 +6,8 @@
  * so that it is ready for translation.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 
 namespace WPPluginBoilerplate\System;
@@ -19,10 +19,11 @@ namespace WPPluginBoilerplate\System;
  * so that it is ready for translation.
  *
  * @package System
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  */
 class I18n {
+
 
 	/**
 	 * Initializes the class and set its properties.

@@ -3,8 +3,8 @@
  * Main plugin file.
  *
  * @package Bootstrap
- * @author Pierre Lannoy <https://pierre.lannoy.fr/>.
- * @since 1.0.0
+ * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
+ * @since   1.0.0
  *
  * @wordpress-plugin
  * Plugin Name:       WordPress plugin boilerplate
@@ -53,7 +53,7 @@ function wppb_deactivate() {
  * @since 1.0.0
  */
 function wppb_uninstall() {
-	WPPluginBoilerplate\Plugin\Uninstaller::uninstall();
+	 WPPluginBoilerplate\Plugin\Uninstaller::uninstall();
 }
 
 /**
