@@ -5,6 +5,7 @@
  * @package System
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
+ * @noinspection PhpCSValidationInspection
  */
 
 namespace WPPluginBoilerplate\System;
@@ -90,6 +91,7 @@ class Cache {
 	public static function init() {
 		self::$ttls = array(
 			'ephemeral' => -1,
+			'infinite'  => 0,
 			'diagnosis' => 3600,
 		);
 	}
@@ -128,6 +130,57 @@ class Cache {
 	 */
 	public static function get( $item_name ) {
 		return get_transient( self::full_item_name( $item_name ) );
+	}
+
+	/**
+	 * Set the value of a cache item.
+	 *
+	 * You do not need to serialize values. If the value needs to be serialized, then
+	 * it will be serialized before it is set.
+	 *
+	 * @param  string $item_name Item name. Expected to not be SQL-escaped.
+	 * @param  mixed  $value     Item value. Must be serializable if non-scalar.
+	 *                           Expected to not be SQL-escaped.
+	 * @param  string $ttl       Optional. The previously defined ttl @see self::init().
+	 * @return bool False if value was not set and true if value was set.
+	 * @since  1.0.0
+	 */
+	public static function set( $item_name, $value, $ttl = 'default' ) {
+		$expiration = self::$default_ttl;
+		if ( array_key_exists( $ttl, self::$ttls ) ) {
+			$expiration = self::$ttls[ $ttl ];
+		}
+		if ( $expiration >= 0 ) {
+			return set_transient( self::full_item_name( $item_name ), $value, $expiration );
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Delete the value of a cache item.
+	 *
+	 * This function accepts generic car "*".
+	 *
+	 * @param  string $item_name Item name. Expected to not be SQL-escaped.
+	 * @return integer Number of deleted items.
+	 * @since  1.0.0
+	 */
+	public static function delete( $item_name ) {
+		global $wpdb;
+		$result = 0;
+		if ( strlen( $item_name ) - 1 === strpos( $item_name, '/*' ) && '/' === $item_name[0] ) {
+			$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name = '_transient_timeout_" . self::full_item_name( str_replace( '/*', '', $item_name ) ) . "' OR option_name LIKE '_transient_timeout_" . self::full_item_name( str_replace( '/*', '/%', $item_name ) ) . "';" );
+		} else {
+			$delete = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name = '_transient_timeout_" . self::full_item_name( $item_name ) . "';" );
+		}
+		foreach ( $delete as $transient ) {
+			$key = str_replace( '_transient_timeout_', '', $transient );
+			if ( delete_transient( $key ) ) {
+				++$result;
+			}
+		}
+		return $result;
 	}
 
 }
