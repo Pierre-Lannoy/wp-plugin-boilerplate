@@ -23,10 +23,10 @@ spl_autoload_register(
 				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
 			}
 
-			if ( strpos( $classname, '-public' ) !== false ) {
+			if ( strpos( $filename, '-public' ) !== false ) {
 				$filepath = WPPB_PUBLIC_DIR;
 			}
-			if ( strpos( $classname, '-admin' ) !== false ) {
+			if ( strpos( $filename, '-admin' ) !== false ) {
 				$filepath = WPPB_ADMIN_DIR;
 			}
 			$file = $filepath . $filename;
