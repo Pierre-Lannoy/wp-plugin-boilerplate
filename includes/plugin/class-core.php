@@ -15,6 +15,7 @@ namespace WPPluginBoilerplate\Plugin;
 use WPPluginBoilerplate\System\Loader;
 use WPPluginBoilerplate\System\I18n;
 use WPPluginBoilerplate\System\Assets;
+use WPPluginBoilerplate\Libraries\Libraries;
 
 /**
  * The core plugin class.
@@ -76,10 +77,12 @@ class Core {
 	 * @access private
 	 */
 	private function define_global_hooks() {
-		$assets  = new Assets();
-		$updater = new Updater();
+		$assets    = new Assets();
+		$updater   = new Updater();
+		$libraries = new Libraries();
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
 		add_shortcode( 'wppb-changelog', array( $updater, 'sc_get_changelog' ) );
+		add_shortcode( 'wppb-libraries', array( $libraries, 'sc_get_list' ) );
 	}
 
 	/**
