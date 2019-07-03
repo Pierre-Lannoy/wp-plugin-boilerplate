@@ -140,16 +140,7 @@ class Libraries {
 		$style       = $_attributes['style'];
 		$result      = '';
 		$list        = array();
-		foreach ( self::get_psr4() as $library ) {
-			$item            = array();
-			$item['name']    = $library['name'];
-			$item['version'] = $library['version'];
-			$item['author']  = $library['author'];
-			$item['url']     = $library['url'];
-			$item['license'] = $this->license_name( $library['license'] );
-			$list[]          = $item;
-		}
-		foreach ( self::get_mono() as $library ) {
+		foreach ( array_merge( self::get_psr4(), self::get_mono() ) as $library ) {
 			$item            = array();
 			$item['name']    = $library['name'];
 			$item['version'] = $library['version'];
