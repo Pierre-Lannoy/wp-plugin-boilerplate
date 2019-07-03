@@ -44,6 +44,7 @@ class Environment {
 		define( 'WPPB_PUBLIC_DIR', WPPB_PLUGIN_DIR . 'public/' );
 		define( 'WPPB_PUBLIC_URL', WPPB_PLUGIN_URL . 'public/' );
 		define( 'WPPB_INCLUDES_DIR', WPPB_PLUGIN_DIR . 'includes/' );
+		define( 'WPPB_VENDOR_DIR', WPPB_PLUGIN_DIR . 'includes/libraries/' );
 		define( 'WPPB_LANGUAGES_DIR', WPPB_PLUGIN_DIR . 'languages/' );
 		define( 'WPPB_ADMIN_RELATIVE_URL', self::admin_relative_url() );
 		define( 'WPPB_AJAX_RELATIVE_URL', self::ajax_relative_url() );

@@ -76,9 +76,10 @@ class Core {
 	 * @access private
 	 */
 	private function define_global_hooks() {
-		$assets = new Assets();
+		$assets  = new Assets();
+		$updater = new Updater();
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
-
+		add_shortcode( 'wppb-changelog', array( $updater, 'sc_get_changelog' ) );
 	}
 
 	/**
@@ -90,10 +91,10 @@ class Core {
 	 */
 	private function define_admin_hooks() {
 		$plugin_admin = new Wp_Plugin_Boilerplate_Admin();
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
-		$this->loader->add_action('admin_menu', $plugin_admin, 'init_admin_menus');
-		$this->loader->add_action('admin_init', $plugin_admin, 'init_settings_sections');
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'init_admin_menus' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings_sections' );
 	}
 
 	/**

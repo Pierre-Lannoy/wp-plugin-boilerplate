@@ -10,7 +10,17 @@
 spl_autoload_register(
 	function ( $class ) {
 		$classname = $class;
-		$filepath  = WPPB_INCLUDES_DIR . 'libraries/';
-		// Filter namespaces here.
+		$filepath  = '';
+		$filename  = '';
+		if ( 'Parsedown' === $classname ) {
+			$filename = 'Parsedown.php';
+			$filepath = WPPB_VENDOR_DIR . 'parsedown/';
+		}
+		if ( '' !== $filename && '' !== $filepath ) {
+			$file = $filepath . $filename;
+			if ( file_exists( $file ) ) {
+				include_once $file;
+			}
+		}
 	}
 );
