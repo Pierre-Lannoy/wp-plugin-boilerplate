@@ -81,6 +81,7 @@ class Core {
 		$updater   = new Updater();
 		$libraries = new Libraries();
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
+		$this->loader->add_action( 'auto_update_plugin', $updater, 'auto_update_plugin', 10, 2 );
 		add_shortcode( 'wppb-changelog', array( $updater, 'sc_get_changelog' ) );
 		add_shortcode( 'wppb-libraries', array( $libraries, 'sc_get_list' ) );
 	}
