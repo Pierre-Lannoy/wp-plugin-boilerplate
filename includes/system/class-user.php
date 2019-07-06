@@ -22,7 +22,6 @@ namespace WPPluginBoilerplate\System;
  */
 class User {
 
-
 	/**
 	 * Initializes the class and set its properties.
 	 *

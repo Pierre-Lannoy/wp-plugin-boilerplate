@@ -16,6 +16,7 @@ use WPPluginBoilerplate\System\Loader;
 use WPPluginBoilerplate\System\I18n;
 use WPPluginBoilerplate\System\Assets;
 use WPPluginBoilerplate\Libraries\Libraries;
+use WPPluginBoilerplate\System\Nag;
 
 /**
  * The core plugin class.
@@ -95,10 +96,13 @@ class Core {
 	 */
 	private function define_admin_hooks() {
 		$plugin_admin = new Wp_Plugin_Boilerplate_Admin();
+		$nag = new Nag();
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'init_admin_menus' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings_sections' );
+		$this->loader->add_action( 'admin_notices', $nag, 'display_nag' );
+		$this->loader->add_action( 'wp_ajax_hide_nag', $nag, 'hide_nag_callback' );
 	}
 
 	/**
