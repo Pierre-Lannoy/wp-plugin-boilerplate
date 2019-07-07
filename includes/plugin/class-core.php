@@ -95,14 +95,15 @@ class Core {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
+		//Nag::add('test', 'info', 'Hello!');
 		$plugin_admin = new Wp_Plugin_Boilerplate_Admin();
 		$nag = new Nag();
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'init_admin_menus' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings_sections' );
-		$this->loader->add_action( 'admin_notices', $nag, 'display_nag' );
-		$this->loader->add_action( 'wp_ajax_hide_nag', $nag, 'hide_nag_callback' );
+		$this->loader->add_action( 'admin_notices', $nag, 'display' );
+		$this->loader->add_action( 'wp_ajax_hide_wppb_nag', $nag, 'hide_callback' );
 	}
 
 	/**

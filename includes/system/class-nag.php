@@ -17,13 +17,77 @@ namespace WPPluginBoilerplate\System;
  * Define the nag functionality.
  *
  * Handles all nag operations. Note this nag feature respects the
- * DISABLE_NAG_NOTICES unofficial standard.
+ * DISABLE_NAG_NOTICES unofficial "standard".
  *
  * @package System
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
 class Nag {
+
+	/**
+	 * The nags list.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @var    array    $nags    The nags list.
+	 */
+	private static $nags = array();
+
+	/**
+	 * Indicates whether nags are allowed or not.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @var    boolean    $allowed    Is nags allowed?
+	 */
+	private static $allowed = true;
+
+	/**
+	 * Verify if nags are allowed and if yes, load the nags.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function init() {
+		if ( defined( 'DISABLE_NAG_NOTICES' ) ) {
+			self::$allowed = DISABLE_NAG_NOTICES;
+		}
+		if ( self::$allowed ) {
+			self::$allowed = get_option( WPPB_PRODUCT_ABBREVIATION . '_display_nag', true );
+		}
+		if ( self::$allowed ) {
+			self::$nags = get_option( WPPB_PRODUCT_ABBREVIATION . '_nags', array() );
+		}
+	}
+
+	/**
+	 * Adds a Nag.
+	 *
+	 * @param   string $id     Id of the nag.
+	 * @param   string $type   Type of the nag ('error', 'warning', 'success' or 'info').
+	 * @param   string $value  Value to display.
+	 * @since 1.0.0
+	 */
+	public static function add( $id, $type, $value ) {
+		self::$nags[ $id ] = array(
+			'type'  => $type,
+			'value' => $value,
+		);
+		update_option( WPPB_PRODUCT_ABBREVIATION . '_nags', self::$nags );
+	}
+
+	/**
+	 * Deletes a Nag.
+	 *
+	 * @param   string $id     Id of the nag.
+	 * @since 1.0.0
+	 */
+	public static function delete( $id ) {
+		if ( array_key_exists( $id, self::$nags ) ) {
+			unset( self::$nags[ $id ] );
+			update_option( WPPB_PRODUCT_ABBREVIATION . '_nags', self::$nags );
+		}
+	}
 
 	/**
 	 * Initializes the class and set its properties.
@@ -34,27 +98,53 @@ class Nag {
 	}
 
 	/**
-	 * Show a notice.
+	 * Show all available notices.
 	 *
 	 * @since 1.0.0
 	 */
-	public function admin_notice_update_done() {
-		//$s = sprintf(__('%s has been updated.', 'live-weather-station'), LWS_PLUGIN_NAME) ;
-		//$s .= ' '. sprintf(__('Your site now uses version %s.', 'live-weather-station'), LWS_VERSION) ;
-		$s = '';
-		$n = wp_nonce_field( 'wppb-nag-nonce', 'wppbnagnonce', false );
-		print('<div id="whatsnew" class="notice notice-info is-dismissible">' . $n . '<p>' . $s . '</p></div>');
+	public function display() {
+		if ( self::$allowed ) {
+			foreach ( self::$nags as $key => $nag ) {
+				$nonce_action = sanitize_key( $key );
+				$nonce_name   = str_replace( array( '-', '_' ), '', $nonce_action );
+				$nonce        = wp_nonce_field( $nonce_action, $nonce_name, false, false );
+				$div_id       = 'wppb-' . $nonce_name;
+				$div_class    = 'notice notice-' . $nag['type'] . ' is-dismissible';
+				$text         = wp_kses(
+					$nag['value'],
+					array(
+						'a'      => array(
+							'href' => true,
+						),
+						'br'     => true,
+						'em'     => true,
+						'strong' => true,
+					)
+				);
+				$html         = '<div id="' . $div_id . '" class="' . $div_class . '">' . $nonce . '<p>' . $text . '</p></div>';
+				$js           = '<script>jQuery(document).ready(function($){$("#' . $div_id . '").on("click", ".notice-dismiss", function(event){$.post(ajaxurl,{action: "hide_wppb_nag",' . $nonce_name . ': $("#' . $nonce_name . '").val()});});});</script>';
+				// phpcs:ignore
+				print( $html . $js );
+			}
+		}
 	}
 
 	/**
-	 * Ajax handler for updating whether to display the NAG notice.
+	 * Ajax handler for updating the displaying status of notices.
 	 *
 	 * @since 1.0.0
 	 */
-	public static function hide_lws_whatsnew_callback() {
-		if (check_ajax_referer('wppb-nag-nonce', 'wppbnagnonce')) {
-			delete_option(WPPB_PRODUCT_ABBREVIATION . '_display_nag');
+	public static function hide_callback() {
+		foreach ( self::$nags as $key => $nag ) {
+			$nonce_action = sanitize_key( $key );
+			$nonce_name   = str_replace( array( '-', '_' ), '', $nonce_action );
+			if ( false !== check_ajax_referer( $nonce_action, $nonce_name, false ) ) {
+				self::delete( $key );
+				wp_die( 200 );
+			}
 		}
-		wp_die(1);
+		wp_die( 409 );
 	}
 }
+
+Nag::init();
