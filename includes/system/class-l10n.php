@@ -59,4 +59,19 @@ class L10n {
 		}
 	}
 
+	/**
+	 * Get the language markup for links.
+	 *
+	 * @param array $langs Optional. Indicates the language in which the link is available.
+	 * @return string The html string of the markup.
+	 * @since 1.0.0
+	 */
+	public static function get_language_markup( $langs = array() ) {
+		if ( count( $langs ) > 0 ) {
+			return '<span style="white-space:nowrap;font-size:65%;vertical-align: super;line-height: 1em;"> (' . implode( '/', $langs ) . ')</span>';
+		} else {
+			return '';
+		}
+	}
+
 }

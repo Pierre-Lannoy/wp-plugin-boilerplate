@@ -11,6 +11,8 @@
 
 namespace WPPluginBoilerplate\Libraries;
 
+use WPPluginBoilerplate\System\L10n;
+
 /**
  * Define the libraries functionality.
  *
@@ -66,6 +68,7 @@ class Libraries {
 			'author'  => sprintf( __( '%s & contributors', 'wp-plugin-boilerplate' ), 'Emanuil Rusev' ),
 			'url'     => 'https://parsedown.org',
 			'license' => 'mit',
+			'langs'   => 'en',
 		);
 	}
 
@@ -147,6 +150,7 @@ class Libraries {
 			$item['author']  = $library['author'];
 			$item['url']     = $library['url'];
 			$item['license'] = $this->license_name( $library['license'] );
+			$item['langs']   = L10n::get_language_markup( explode( ',', $library['langs'] ) );
 			$list[]          = $item;
 		}
 		$item            = array();
@@ -155,13 +159,14 @@ class Libraries {
 		$item['author']  = 'Pierre Lannoy';
 		$item['url']     = 'https://github.com/Pierre-Lannoy/wp-plugin-boilerplate';
 		$item['license'] = $this->license_name( 'gpl2' );
+		$item['langs']   = L10n::get_language_markup( array( 'en' ) );
 		$list[]          = $item;
 		usort( $list, array( $this, 'reorder_list' ) );
 		if ( 'html' === $style ) {
 			$items = array();
 			foreach ( $list as $library ) {
 				/* translators: as in the sentence "Product W version X by author Y (license Z)" */
-				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a> by %4$s (%5$s)', 'wp-plugin-boilerplate' ), $library['url'], $library['name'], $library['version'], $library['author'], $library['license'] );
+				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'wp-plugin-boilerplate' ), $library['url'], $library['name'], $library['version'], $library['langs'], $library['author'], $library['license'] );
 			}
 			$result = implode( ', ', $items );
 		}
