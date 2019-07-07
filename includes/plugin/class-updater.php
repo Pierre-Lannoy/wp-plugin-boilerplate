@@ -129,7 +129,7 @@ class Updater {
 		if ( file_exists( $changelog ) ) {
 			try {
 				// phpcs:ignore
-				$content = file_get_contents( $changelog );
+				$content = wp_kses(file_get_contents( $changelog ), array());
 				if ( $content ) {
 					switch ( $style ) {
 						case 'html':
@@ -160,6 +160,27 @@ class Updater {
 		if ( $clean ) {
 			$result = preg_replace( '/<h1>.*<\/h1>/iU', '', $result );
 		}
-		return $result;
+		return wp_kses(
+			$result,
+			array(
+				'a'          => array(
+					'href'  => array(),
+					'title' => array(),
+					'rel'   => array(),
+				),
+				'blockquote' => array( 'cite' => array() ),
+				'br'         => array(),
+				'p'          => array(),
+				'code'       => array(),
+				'pre'        => array(),
+				'em'         => array(),
+				'strong'     => array(),
+				'ul'         => array(),
+				'ol'         => array(),
+				'li'         => array(),
+				'h3'         => array(),
+				'h4'         => array(),
+			)
+		);
 	}
 }
