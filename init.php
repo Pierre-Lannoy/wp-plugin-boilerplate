@@ -16,6 +16,6 @@ define( 'WPPB_VERSION', '1.0.0' );
 define( 'WPPB_CODENAME', '"-"' );
 
 define( 'WPPB_MINIMUM_WP_VERSION', '4.9' );
-define( 'WPPB_MINIMUM_PHP_VERSION', '7.1' );
+define( 'WPPB_MINIMUM_PHP_VERSION', '7.2' );
 
 define( 'WPPB_CDN_AVAILABLE', true );

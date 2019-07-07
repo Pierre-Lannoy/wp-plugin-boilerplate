@@ -9,6 +9,8 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
+use WPPluginBoilerplate\System\Nag;
+
 /**
  * Plugin updates handling.
  *
@@ -21,11 +23,42 @@ namespace WPPluginBoilerplate\Plugin;
 class Updater {
 
 	/**
-	 * Initializes the class and set its properties.
+	 * Initializes the class, set its properties and performs
+	 * post-update processes if needed.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		$old = get_option( WPPB_PRODUCT_ABBREVIATION . '_version', '0.0.0' );
+		if ( WPPB_VERSION !== $old ) {
+			if ( '0.0.0' === $old ) {
+				$this->install();
+				$message = sprintf( __( '%1$s has been correctly installed.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME );
+			} else {
+				$this->update( $old );
+				$message = sprintf( __( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
+			}
+			Nag::add( 'update', 'info', $message );
+			update_option( WPPB_PRODUCT_ABBREVIATION . '_version', WPPB_VERSION );
+		}
+	}
+
+	/**
+	 * Performs post-installation processes.
+	 *
+	 * @since 1.0.0
+	 */
+	private function install() {
+
+	}
+
+	/**
+	 * Performs post-update processes.
+	 *
+	 * @param   string $from   The version from which the plugin is updated.
+	 * @since 1.0.0
+	 */
+	private function update( $from ) {
 
 	}
 
