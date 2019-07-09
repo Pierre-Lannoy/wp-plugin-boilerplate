@@ -57,19 +57,19 @@ class Libraries {
 	 * @since 1.0.0
 	 */
 	public static function init() {
-		self::$psr4_libraries = array();
-		// self::$psr4_libraries['parsedown'] = array('name' => 'Parsedown', 'prefix' => '', 'base' => WPPB_VENDOR_DIR . 'parsedown/', 'version' => '1.8.0-beta-7', 'license' => 'mit');.
-		self::$mono_libraries              = array();
-		self::$mono_libraries['parsedown'] = array(
+		self::$psr4_libraries              = [];
+		self::$mono_libraries              = [];
+		self::$mono_libraries['parsedown'] = [
 			'name'    => 'Parsedown',
 			'detect'  => 'Parsedown',
 			'base'    => WPPB_VENDOR_DIR . 'parsedown/',
 			'version' => '1.8.0-beta-7',
+			// phpcs:ignore
 			'author'  => sprintf( __( '%s & contributors', 'wp-plugin-boilerplate' ), 'Emanuil Rusev' ),
 			'url'     => 'https://parsedown.org',
 			'license' => 'mit',
 			'langs'   => 'en',
-		);
+		];
 	}
 
 	/**
@@ -95,8 +95,8 @@ class Libraries {
 	/**
 	 * Compare two items based on name field.
 	 *
-	 * @param  string $a     The first element.
-	 * @param  string $b     The second element.
+	 * @param  array $a     The first element.
+	 * @param  array $b     The second element.
 	 * @return  boolean     True if $a>$b, false otherwise.
 	 * @since 1.0.0
 	 */
@@ -135,16 +135,16 @@ class Libraries {
 	 */
 	public function sc_get_list( $attributes ) {
 		$_attributes = shortcode_atts(
-			array(
+			[
 				'style' => 'html',
-			),
+			],
 			$attributes
 		);
 		$style       = $_attributes['style'];
 		$result      = '';
-		$list        = array();
+		$list        = [];
 		foreach ( array_merge( self::get_psr4(), self::get_mono() ) as $library ) {
-			$item            = array();
+			$item            = [];
 			$item['name']    = $library['name'];
 			$item['version'] = $library['version'];
 			$item['author']  = $library['author'];
@@ -153,17 +153,17 @@ class Libraries {
 			$item['langs']   = L10n::get_language_markup( explode( ',', $library['langs'] ) );
 			$list[]          = $item;
 		}
-		$item            = array();
+		$item            = [];
 		$item['name']    = 'Plugin Boilerplate';
 		$item['version'] = '';
 		$item['author']  = 'Pierre Lannoy';
 		$item['url']     = 'https://github.com/Pierre-Lannoy/wp-plugin-boilerplate';
 		$item['license'] = $this->license_name( 'gpl2' );
-		$item['langs']   = L10n::get_language_markup( array( 'en' ) );
+		$item['langs']   = L10n::get_language_markup( [ 'en' ] );
 		$list[]          = $item;
-		usort( $list, array( $this, 'reorder_list' ) );
+		usort( $list, [ $this, 'reorder_list' ] );
 		if ( 'html' === $style ) {
-			$items = array();
+			$items = [];
 			foreach ( $list as $library ) {
 				/* translators: as in the sentence "Product W version X by author Y (license Z)" */
 				$items[] = sprintf( __( '<a href="%1$s">%2$s %3$s</a>%4$s by %5$s (%6$s)', 'wp-plugin-boilerplate' ), $library['url'], $library['name'], $library['version'], $library['langs'], $library['author'], $library['license'] );

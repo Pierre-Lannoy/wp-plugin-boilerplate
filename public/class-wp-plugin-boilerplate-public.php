@@ -54,7 +54,7 @@ class Wp_Plugin_Boilerplate_Public {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-		$this->assets->register_script( WPPB_ASSETS_ID, WPPB_PUBLIC_URL, 'js/wp-plugin-boilerplate.min.js', array( 'jquery' ) );
+		$this->assets->register_script( WPPB_ASSETS_ID, WPPB_PUBLIC_URL, 'js/wp-plugin-boilerplate.min.js', [ 'jquery' ] );
 	}
 
 }

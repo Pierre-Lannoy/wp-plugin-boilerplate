@@ -11,6 +11,8 @@
 
 namespace WPPluginBoilerplate\System;
 
+use WP_User;
+
 /**
  * Define the localization functionality.
  *
@@ -21,7 +23,6 @@ namespace WPPluginBoilerplate\System;
  * @since   1.0.0
  */
 class L10n {
-
 
 	/**
 	 * Initializes the class and set its properties.
@@ -66,7 +67,7 @@ class L10n {
 	 * @return string The html string of the markup.
 	 * @since 1.0.0
 	 */
-	public static function get_language_markup( $langs = array() ) {
+	public static function get_language_markup( $langs = [] ) {
 		if ( count( $langs ) > 0 ) {
 			return '<span style="white-space:nowrap;font-size:65%;vertical-align: super;line-height: 1em;"> (' . implode( '/', $langs ) . ')</span>';
 		} else {

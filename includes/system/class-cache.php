@@ -89,11 +89,11 @@ class Cache {
 	 * @since 1.0.0
 	 */
 	public static function init() {
-		self::$ttls = array(
+		self::$ttls = [
 			'ephemeral' => -1,
 			'infinite'  => 0,
 			'diagnosis' => 3600,
-		);
+		];
 	}
 
 	/**

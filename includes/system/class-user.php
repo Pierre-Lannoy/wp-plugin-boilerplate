@@ -11,6 +11,8 @@
 
 namespace WPPluginBoilerplate\System;
 
+use WP_User;
+
 /**
  * Define the user functionality.
  *

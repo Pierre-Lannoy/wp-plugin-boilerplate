@@ -32,7 +32,7 @@ class Nag {
 	 * @access private
 	 * @var    array    $nags    The nags list.
 	 */
-	private static $nags = array();
+	private static $nags = [];
 
 	/**
 	 * Indicates whether nags are allowed or not.
@@ -53,10 +53,10 @@ class Nag {
 			self::$allowed = DISABLE_NAG_NOTICES;
 		}
 		if ( self::$allowed ) {
-			self::$allowed = get_option( WPPB_PRODUCT_ABBREVIATION . '_display_nag', true );
+			self::$allowed = Option::get( 'display_nag' );
 		}
 		if ( self::$allowed ) {
-			self::$nags = get_option( WPPB_PRODUCT_ABBREVIATION . '_nags', array() );
+			self::$nags = Option::get( 'nags' );
 		}
 	}
 
@@ -69,11 +69,11 @@ class Nag {
 	 * @since 1.0.0
 	 */
 	public static function add( $id, $type, $value ) {
-		self::$nags[ $id ] = array(
+		self::$nags[ $id ] = [
 			'type'  => $type,
 			'value' => $value,
-		);
-		update_option( WPPB_PRODUCT_ABBREVIATION . '_nags', self::$nags );
+		];
+		Option::set( 'nags', self::$nags );
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Nag {
 	public static function delete( $id ) {
 		if ( array_key_exists( $id, self::$nags ) ) {
 			unset( self::$nags[ $id ] );
-			update_option( WPPB_PRODUCT_ABBREVIATION . '_nags', self::$nags );
+			Option::set( 'nags', self::$nags );
 		}
 	}
 
@@ -106,20 +106,20 @@ class Nag {
 		if ( self::$allowed ) {
 			foreach ( self::$nags as $key => $nag ) {
 				$nonce_action = sanitize_key( $key );
-				$nonce_name   = str_replace( array( '-', '_' ), '', $nonce_action );
+				$nonce_name   = str_replace( [ '-', '_' ], '', $nonce_action );
 				$nonce        = wp_nonce_field( $nonce_action, $nonce_name, false, false );
 				$div_id       = 'wppb-' . $nonce_name;
 				$div_class    = 'notice notice-' . $nag['type'] . ' is-dismissible';
 				$text         = wp_kses(
 					$nag['value'],
-					array(
-						'a'      => array(
+					[
+						'a'      => [
 							'href' => true,
-						),
+						],
 						'br'     => true,
 						'em'     => true,
 						'strong' => true,
-					)
+					]
 				);
 				$html         = '<div id="' . $div_id . '" class="' . $div_class . '">' . $nonce . '<p>' . $text . '</p></div>';
 				$js           = '<script>jQuery(document).ready(function($){$("#' . $div_id . '").on("click", ".notice-dismiss", function(event){$.post(ajaxurl,{action: "hide_wppb_nag",' . $nonce_name . ': $("#' . $nonce_name . '").val()});});});</script>';
@@ -137,7 +137,7 @@ class Nag {
 	public static function hide_callback() {
 		foreach ( self::$nags as $key => $nag ) {
 			$nonce_action = sanitize_key( $key );
-			$nonce_name   = str_replace( array( '-', '_' ), '', $nonce_action );
+			$nonce_name   = str_replace( [ '-', '_' ], '', $nonce_action );
 			if ( false !== check_ajax_referer( $nonce_action, $nonce_name, false ) ) {
 				self::delete( $key );
 				wp_die( 200 );

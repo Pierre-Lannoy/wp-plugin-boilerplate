@@ -29,7 +29,7 @@ class Option {
 	 * @access private
 	 * @var    array    $defaults    The $defaults list.
 	 */
-	private static $defaults = array();
+	private static $defaults = [];
 
 	/**
 	 * Set the defaults options.
@@ -41,7 +41,7 @@ class Option {
 		$defaults['script_in_footer'] = false;
 		$defaults['auto_update']      = true;
 		$defaults['display_nag']      = true;
-		$defaults['nags']             = array();
+		$defaults['nags']             = [];
 		$defaults['version']          = '0.0.0';
 	}
 

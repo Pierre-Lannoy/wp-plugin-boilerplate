@@ -83,8 +83,8 @@ class Core {
 		$libraries = new Libraries();
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
 		$this->loader->add_action( 'auto_update_plugin', $updater, 'auto_update_plugin', 10, 2 );
-		add_shortcode( 'wppb-changelog', array( $updater, 'sc_get_changelog' ) );
-		add_shortcode( 'wppb-libraries', array( $libraries, 'sc_get_list' ) );
+		add_shortcode( 'wppb-changelog', [ $updater, 'sc_get_changelog' ] );
+		add_shortcode( 'wppb-libraries', [ $libraries, 'sc_get_list' ] );
 	}
 
 	/**
@@ -95,9 +95,8 @@ class Core {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
-		//Nag::add('test', 'info', 'Hello!');
 		$plugin_admin = new Wp_Plugin_Boilerplate_Admin();
-		$nag = new Nag();
+		$nag          = new Nag();
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'init_admin_menus' );

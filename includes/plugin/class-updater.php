@@ -9,7 +9,10 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
+use Parsedown;
 use WPPluginBoilerplate\System\Nag;
+use WPPluginBoilerplate\System\Option;
+use Exception;
 
 /**
  * Plugin updates handling.
@@ -29,17 +32,19 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$old = get_option( WPPB_PRODUCT_ABBREVIATION . '_version', '0.0.0' );
+		$old = Option::get( 'version' );
 		if ( WPPB_VERSION !== $old ) {
 			if ( '0.0.0' === $old ) {
 				$this->install();
+				// phpcs:ignore
 				$message = sprintf( __( '%1$s has been correctly installed.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME );
 			} else {
 				$this->update( $old );
+				// phpcs:ignore
 				$message = sprintf( __( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
 			}
 			Nag::add( 'update', 'info', $message );
-			update_option( WPPB_PRODUCT_ABBREVIATION . '_version', WPPB_VERSION );
+			Option::set( 'version', WPPB_VERSION );
 		}
 	}
 
@@ -85,7 +90,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function is_autoupdatable() {
-		return ( $this->is_updatable() && get_option( WPPB_PRODUCT_ABBREVIATION . '_auto_update' ) );
+		return ( $this->is_updatable() && Option::get( 'auto_update' ) );
 	}
 
 	/**
@@ -115,10 +120,10 @@ class Updater {
 	 */
 	public function sc_get_changelog( $attributes ) {
 		$_attributes = shortcode_atts(
-			array(
+			[
 				'style' => 'html',
 				'mode'  => 'clean',
-			),
+			],
 			$attributes
 		);
 		$style       = $_attributes['style'];
@@ -129,7 +134,7 @@ class Updater {
 		if ( file_exists( $changelog ) ) {
 			try {
 				// phpcs:ignore
-				$content = wp_kses(file_get_contents( $changelog ), array());
+				$content = wp_kses(file_get_contents( $changelog ), [] );
 				if ( $content ) {
 					switch ( $style ) {
 						case 'html':
@@ -155,32 +160,32 @@ class Updater {
 	 * @since   1.0.0
 	 */
 	private function html_changelog( $content, $clean = false ) {
-		$markdown = new \Parsedown();
+		$markdown = new Parsedown();
 		$result   = $markdown->text( $content );
 		if ( $clean ) {
 			$result = preg_replace( '/<h1>.*<\/h1>/iU', '', $result );
 		}
 		return wp_kses(
 			$result,
-			array(
-				'a'          => array(
-					'href'  => array(),
-					'title' => array(),
-					'rel'   => array(),
-				),
-				'blockquote' => array( 'cite' => array() ),
-				'br'         => array(),
-				'p'          => array(),
-				'code'       => array(),
-				'pre'        => array(),
-				'em'         => array(),
-				'strong'     => array(),
-				'ul'         => array(),
-				'ol'         => array(),
-				'li'         => array(),
-				'h3'         => array(),
-				'h4'         => array(),
-			)
+			[
+				'a'          => [
+					'href'  => [],
+					'title' => [],
+					'rel'   => [],
+				],
+				'blockquote' => [ 'cite' => [] ],
+				'br'         => [],
+				'p'          => [],
+				'code'       => [],
+				'pre'        => [],
+				'em'         => [],
+				'strong'     => [],
+				'ul'         => [],
+				'ol'         => [],
+				'li'         => [],
+				'h3'         => [],
+				'h4'         => [],
+			]
 		);
 	}
 }

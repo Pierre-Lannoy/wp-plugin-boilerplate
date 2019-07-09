@@ -9,6 +9,8 @@
 
 namespace WPPluginBoilerplate\System;
 
+use Exception;
+
 /**
  * The class responsible to manage and detect plugin environment.
  *
@@ -62,7 +64,7 @@ class Environment {
 	public static function major_version( $version = WPPB_VERSION ) {
 		try {
 			$result = substr( $version, 0, strpos( $version, '.' ) );
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			$result = 'x';
 		}
 		return $result;
@@ -79,7 +81,7 @@ class Environment {
 		try {
 			$result = substr( $version, strpos( $version, '.' ) + 1, 1000 );
 			$result = substr( $result, 0, strpos( $result, '.' ) );
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			$result = 'x';
 		}
 		return $result;
@@ -99,7 +101,7 @@ class Environment {
 			if ( strpos( $result, '-' ) > 0 ) {
 				$result = substr( $result, 0, strpos( $result, '-' ) );
 			}
-		} catch ( \Exception $ex ) {
+		} catch ( Exception $ex ) {
 			$result = 'x';
 		}
 		return $result;
@@ -150,7 +152,7 @@ class Environment {
 	 */
 	public static function wordpress_debug_text() {
 		$debug = false;
-		$opt   = array();
+		$opt   = [];
 		$s     = '';
 		if ( defined( 'WP_DEBUG' ) ) {
 			if ( WP_DEBUG ) {

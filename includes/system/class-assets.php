@@ -33,7 +33,7 @@ class Assets {
 	 * @since 1.0.0
 	 */
 	public function prefetch() {
-		if ( (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_use_cdn' ) && WPPB_CDN_AVAILABLE ) {
+		if ( Option::get( 'use_cdn' ) && WPPB_CDN_AVAILABLE ) {
 			echo '<meta http-equiv="x-dns-prefetch-control" content="on">';
 			echo '<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />';
 		}
@@ -55,8 +55,8 @@ class Assets {
 	 * @return bool Whether the style has been registered. True on success, false on failure.
 	 * @since  1.0.0
 	 */
-	public function register_style( $handle, $src, $file, $deps = array(), $media = 'all' ) {
-		if ( (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_use_cdn' ) && WPPB_CDN_AVAILABLE ) {
+	public function register_style( $handle, $src, $file, $deps = [], $media = 'all' ) {
+		if ( Option::get( 'use_cdn' ) && WPPB_CDN_AVAILABLE ) {
 			if ( WPPB_ADMIN_URL === $src ) {
 				$file = 'https://cdn.jsdelivr.net/wp/' . WPPB_SLUG . '/tags/' . WPPB_VERSION . '/admin/' . $file;
 			} else {
@@ -82,17 +82,17 @@ class Assets {
 	 * @return bool Whether the script has been registered. True on success, false on failure.
 	 * @since  1.0.0
 	 */
-	public function register_script( $handle, $src, $file, $deps = array() ) {
-		if ( (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_use_cdn' ) && WPPB_CDN_AVAILABLE ) {
+	public function register_script( $handle, $src, $file, $deps = [] ) {
+		if ( Option::get( 'use_cdn' ) && WPPB_CDN_AVAILABLE ) {
 			if ( WPPB_ADMIN_URL === $src ) {
 				$file = 'https://cdn.jsdelivr.net/wp/' . WPPB_SLUG . '/tags/' . WPPB_VERSION . '/admin/' . $file;
 			} else {
 				$file = 'https://cdn.jsdelivr.net/wp/' . WPPB_SLUG . '/tags/' . WPPB_VERSION . '/public/' . $file;
 			}
 			// phpcs:ignore
-			return wp_register_script( $handle, $file, $deps, null, (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_script_in_footer' ) );
+			return wp_register_script( $handle, $file, $deps, null, Option::get( 'script_in_footer' ) );
 		} else {
-			return wp_register_script( $handle, $src . $file, $deps, WPPB_VERSION, (bool) get_option( WPPB_PRODUCT_ABBREVIATION . '_script_in_footer' ) );
+			return wp_register_script( $handle, $src . $file, $deps, WPPB_VERSION, Option::get( 'script_in_footer' ) );
 		}
 	}
 

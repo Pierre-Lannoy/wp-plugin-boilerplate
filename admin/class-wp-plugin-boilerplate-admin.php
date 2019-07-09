@@ -53,7 +53,7 @@ class Wp_Plugin_Boilerplate_Admin {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
-		$this->assets->register_script( WPPB_ASSETS_ID, WPPB_ADMIN_URL, 'js/wp-plugin-boilerplate.min.js', array( 'jquery' ) );
+		$this->assets->register_script( WPPB_ASSETS_ID, WPPB_ADMIN_URL, 'js/wp-plugin-boilerplate.min.js', [ 'jquery' ] );
 	}
 
 	/**
