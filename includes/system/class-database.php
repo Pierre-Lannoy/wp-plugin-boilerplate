@@ -83,7 +83,7 @@ class Database {
 	public function delete_lines( $table_name, $field_name, $value, $sep = '' ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . $table_name;
-		$sql        = "DELETE FROM " . $table_name . ' WHERE ' . $field_name . ' IN (' . $sep . implode( $sep . ',' . $sep, $value ) . $sep . ')';
+		$sql        = 'DELETE FROM ' . $table_name . ' WHERE ' . $field_name . ' IN (' . $sep . implode( $sep . ',' . $sep, $value ) . $sep . ')';
 		// phpcs:ignore
 		return $wpdb->query( $sql );
 	}
