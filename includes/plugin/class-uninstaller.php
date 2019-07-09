@@ -10,6 +10,7 @@
 namespace WPPluginBoilerplate\Plugin;
 
 use WPPluginBoilerplate\System\Option;
+use WPPluginBoilerplate\System\User;
 
 /**
  * Fired during plugin deletion.
@@ -29,6 +30,7 @@ class Uninstaller {
 	 */
 	public static function uninstall() {
 		Option::delete_all();
+		User::delete_all_meta();
 		// Delete cache?
 	}
 
