@@ -18,7 +18,6 @@ namespace WPPluginBoilerplate\System;
  */
 class Environment {
 
-
 	/**
 	 * Initializes the class and set its properties.
 	 *

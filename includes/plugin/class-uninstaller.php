@@ -9,6 +9,8 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
+use WPPluginBoilerplate\System\Option;
+
 /**
  * Fired during plugin deletion.
  *
@@ -20,14 +22,13 @@ namespace WPPluginBoilerplate\Plugin;
  */
 class Uninstaller {
 
-
 	/**
 	 * Delete the plugin.
 	 *
 	 * @since 1.0.0
 	 */
 	public static function uninstall() {
-		// Remove options.
+		Option::delete_all();
 		// Delete cache?
 	}
 
