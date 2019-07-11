@@ -25,7 +25,7 @@ spl_autoload_register(
 			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\Feature\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'features/';
 			}
-			if ( strpos( $class, 'WPPluginBoilerplate\Libraries\\' ) === 0 ) {
+			if ( strpos( $class, 'WPPluginBoilerplate\Library\\' ) === 0 ) {
 				$filepath = WPPB_VENDOR_DIR;
 			}
 			if ( strpos( $filename, '-public' ) !== false ) {

@@ -4,12 +4,12 @@
  *
  * Handles all libraries (vendor) operations and versioning.
  *
- * @package System
+ * @package Libraries
  * @author  Pierre Lannoy <https://pierre.lannoy.fr/>.
  * @since   1.0.0
  */
 
-namespace WPPluginBoilerplate\Libraries;
+namespace WPPluginBoilerplate\Library;
 
 use WPPluginBoilerplate\System\L10n;
 

@@ -15,7 +15,7 @@ namespace WPPluginBoilerplate\Plugin;
 use WPPluginBoilerplate\System\Loader;
 use WPPluginBoilerplate\System\I18n;
 use WPPluginBoilerplate\System\Assets;
-use WPPluginBoilerplate\Libraries\Libraries;
+use WPPluginBoilerplate\Library\Libraries;
 use WPPluginBoilerplate\System\Nag;
 
 /**
