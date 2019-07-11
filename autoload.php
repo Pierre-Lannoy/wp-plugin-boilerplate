@@ -19,11 +19,10 @@ spl_autoload_register(
 			if ( strpos( $class, 'WPPluginBoilerplate\System\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'system/';
 			}
-			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
-				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
-			}
 			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\Feature\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'features/';
+			} elseif ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
+				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
 			}
 			if ( strpos( $class, 'WPPluginBoilerplate\Library\\' ) === 0 ) {
 				$filepath = WPPB_VENDOR_DIR;
