@@ -22,6 +22,9 @@ spl_autoload_register(
 			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\\' ) === 0 ) {
 				$filepath = WPPB_INCLUDES_DIR . 'plugin/';
 			}
+			if ( strpos( $class, 'WPPluginBoilerplate\Plugin\Feature\\' ) === 0 ) {
+				$filepath = WPPB_INCLUDES_DIR . 'features/';
+			}
 			if ( strpos( $class, 'WPPluginBoilerplate\Libraries\\' ) === 0 ) {
 				$filepath = WPPB_VENDOR_DIR;
 			}
