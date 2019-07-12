@@ -115,7 +115,17 @@ class Environment {
 	 */
 	public static function is_wordpress_version_ok() {
 		global $wp_version;
-		return ( ! version_compare( $wp_version, WPPB_MINIMUM_WP_VERSION, '<' ) );
+		return ( ! version_compare( $wp_version, DECALOG_MINIMUM_WP_VERSION, '<' ) );
+	}
+
+	/**
+	 * Verification of WP MU.
+	 *
+	 * @return boolean     True if MU, false otherwise.
+	 * @since  1.0.0
+	 */
+	public static function is_wordpress_multisite() {
+		return is_multisite();
 	}
 
 	/**
