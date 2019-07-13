@@ -10,7 +10,7 @@
 namespace WPPluginBoilerplate\Plugin;
 
 /**
- * Fired after 'init' hook.
+ * Fired after 'plugins_loaded' hook.
  *
  * This class defines all code necessary to run during the plugin's initialization.
  *
@@ -21,11 +21,20 @@ namespace WPPluginBoilerplate\Plugin;
 class Initializer {
 
 	/**
-	 * Initializes the plugin.
+	 * Initialize the class and set its properties.
+	 *
+	 * @since   1.0.0
+	 */
+	public function __construct() {
+
+	}
+
+	/**
+	 * Initialize the plugin.
 	 *
 	 * @since 1.0.0
 	 */
-	public static function initialize() {
+	public function initialize() {
 
 	}
 
