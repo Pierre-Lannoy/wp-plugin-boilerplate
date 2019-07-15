@@ -31,7 +31,7 @@ class Form {
 	}
 
 	/**
-	 * Get a input form field for number.
+	 * Get an input form field for number.
 	 *
 	 * @param   string  $id     The id (and the name) of the control.
 	 * @param   integer $value  The current value.
@@ -62,6 +62,16 @@ class Form {
 	}
 
 	/**
+	 * Echoes an input form field for number.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_input_integer( $args ) {
+		echo $this->field_input_integer( $args['id'], $args['value'], $args['min'], $args['max'], $args['step'], $args['description'], $args['full_width'] );
+	}
+
+	/**
 	 * Get a text form field.
 	 *
 	 * @param   string  $id The id (and the name) of the control.
@@ -82,6 +92,16 @@ class Form {
 			$html .= '<p class="description">' . $description . '</p>';
 		}
 		return $html;
+	}
+
+	/**
+	 * Echoes a text form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_input_text( $args ) {
+		echo $this->field_input_text( $args['id'], $args['value'], $args['description'], $args['full_width'] );
 	}
 
 	/**
@@ -108,7 +128,17 @@ class Form {
 	}
 
 	/**
-	 * Get an unprepared select form field.
+	 * Echoes a password form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_input_password( $args ) {
+		echo $this->field_input_password( $args['id'], $args['value'], $args['description'], $args['full_width'] );
+	}
+
+	/**
+	 * Get a select form field.
 	 *
 	 * @param   array      $list   The list of options.
 	 * @param   string     $id The id (and the name) of the control.
@@ -118,7 +148,7 @@ class Form {
 	 * @return  string  The HTML string ready to print.
 	 * @since  1.0.0
 	 */
-	protected function field_select( $list, $id, $value, $description = null, $full_width = true ) {
+	public function field_select( $list, $id, $value, $description = null, $full_width = true ) {
 		if ( $full_width ) {
 			$width = ' style="width:100%;"';
 		} else {
@@ -133,6 +163,91 @@ class Form {
 			$html .= '<p class="description">' . $description . '</p>';
 		}
 		return $html;
+	}
+
+	/**
+	 * Echoes a select form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_select( $args ) {
+		echo $this->field_select( $args['list'], $args['id'], $args['value'], $args['description'], $args['full_width'] );
+	}
+
+	/**
+	 * Get a radio form field.
+	 *
+	 * @param   array      $list   The list of options.
+	 * @param   string     $id The id (and the name) of the control.
+	 * @param   int|string $value  The string to put in the text field.
+	 * @param   string     $description    Optional. A description to display.
+	 * @param   boolean    $full_width Optional. Is the control full width?
+	 * @return  string  The HTML string ready to print.
+	 * @since  1.0.0
+	 */
+	public function field_radio( $list, $id, $value, $description = null, $full_width = true ) {
+		if ( $full_width ) {
+			$width = ' style="width:100%;"';
+		} else {
+			$width = '';
+		}
+		$html = '';
+		foreach ( $list as $val ) {
+			$html .= '<label><input id="' . $id . '" name="' . $id . '" type="radio" value="' . $val[0] . '"' . ( $val[0] == $value ? ' checked="checked"' : '' ) . '/>' . $val[1] . '</label>';
+			if ( $val !== end( $list ) ) {
+				$html .= '<br/>';
+			}
+		}
+		$html = '<fieldset' . $width . '>' . $html . '</fieldset>';
+		if ( isset( $description ) ) {
+			$html .= '<p class="description">' . $description . '</p>';
+		}
+		return $html;
+	}
+
+	/**
+	 * Echoes a radio form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_radio( $args ) {
+		echo $this->field_radio( $args['list'], $args['id'], $args['value'], $args['description'], $args['full_width'] );
+	}
+
+	/**
+	 * Get a checkbox form field.
+	 *
+	 * @param   string  $text   The text of the checkbox.
+	 * @param   string  $id     The id (and the name) of the control.
+	 * @param   boolean $checked    Is the checkbox on?
+	 * @param   string  $description    Optional. A description to display.
+	 * @param   boolean $full_width     Optional. Is the control full width?
+	 * @return  string  The HTML string ready to print.
+	 * @since   1.0.0
+	 */
+	public function field_checkbox( $text, $id, $checked = false, $description = null, $full_width = true ) {
+		if ( $full_width ) {
+			$width = ' style="width:100%;"';
+		} else {
+			$width = '';
+		}
+		$html = '<fieldset' . $width . '><label><input name="' . $id . '" type="checkbox" value="1"' . ( $checked ? ' checked="checked"' : '' ) . '/>' . $text . '</label></fieldset>';
+		if ( isset( $description ) ) {
+			$html .= '<p class="description">' . $description . '</p>';
+		}
+		return $html;
+	}
+
+	/**
+	 * Echoes a checkbox form field.
+	 *
+	 * @param   array $args   The call arguments.
+	 * @since   1.0.0
+	 */
+	public function echo_field_checkbox( $args ) {
+		echo $this->field_checkbox( $args['text'], $args['id'], $args['checked'], $args['description'], $args['full_width'] );
 	}
 
 }
