@@ -31,5 +31,14 @@ class Http {
 	 */
 	public static $verbs = [ 'get', 'head', 'post', 'put', 'delete', 'connect', 'options', 'trace', 'patch', 'unknown' ];
 
+	/**
+	 * The list of HTTP codes meaning success.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @var    array    $http_success_codes    Maintains the success codes list.
+	 */
+	public static $http_success_codes = [ 200, 201, 202, 203, 204, 205, 206, 207, 300, 301, 302, 303, 304, 305, 306, 307, 308 ];
+
 
 }
