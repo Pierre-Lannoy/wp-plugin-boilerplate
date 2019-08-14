@@ -104,18 +104,6 @@ class Libraries {
 	}
 
 	/**
-	 * Compare two items based on name field.
-	 *
-	 * @param  array $a     The first element.
-	 * @param  array $b     The second element.
-	 * @return  boolean     True if $a>$b, false otherwise.
-	 * @since 1.0.0
-	 */
-	public function reorder_list( $a, $b ) {
-		return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );
-	}
-
-	/**
 	 * Get the full license name.
 	 *
 	 * @param  string $license     The license id.
@@ -172,7 +160,7 @@ class Libraries {
 		$item['license'] = $this->license_name( 'gpl2' );
 		$item['langs']   = L10n::get_language_markup( [ 'en' ] );
 		$list[]          = $item;
-		usort( $list, [ $this, 'reorder_list' ] );
+		usort( $list, function ( $a, $b ) { return strcmp( strtolower( $a['name'] ), strtolower( $b['name'] ) );} );
 		if ( 'html' === $style ) {
 			$items = [];
 			foreach ( $list as $library ) {
