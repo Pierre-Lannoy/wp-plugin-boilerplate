@@ -116,7 +116,7 @@ class Libraries {
 				$result = esc_html( __( 'MIT license', 'wp-plugin-boilerplate' ) );
 				break;
 			case 'apl2':
-				$result = esc_html( __( 'Apache License, Version 2.0', 'wp-plugin-boilerplate' ) );
+				$result = esc_html( __( 'Apache license, version 2.0', 'wp-plugin-boilerplate' ) );
 				break;
 			case 'gpl2':
 				$result = esc_html( __( 'GPL-2.0 license', 'wp-plugin-boilerplate' ) );
