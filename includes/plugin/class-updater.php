@@ -37,11 +37,11 @@ class Updater {
 			if ( '0.0.0' === $old ) {
 				$this->install();
 				// phpcs:ignore
-				$message = sprintf( __( '%1$s has been correctly installed.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME );
+				$message = sprintf( esc_html__( '%1$s has been correctly installed.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME );
 			} else {
 				$this->update( $old );
 				// phpcs:ignore
-				$message = sprintf( __( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
+				$message = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
 			}
 			Nag::add( 'update', 'info', $message );
 			Option::set( 'version', WPPB_VERSION );
@@ -128,7 +128,7 @@ class Updater {
 		);
 		$style       = $_attributes['style'];
 		$mode        = $_attributes['mode'];
-		$error       = __( 'Sorry, unable to find or read changelog file.', 'wp-plugin-boilerplate' );
+		$error       = esc_html__( 'Sorry, unable to find or read changelog file.', 'wp-plugin-boilerplate' );
 		$result      = esc_html( $error );
 		$changelog   = WPPB_PLUGIN_DIR . 'CHANGELOG.md';
 		if ( file_exists( $changelog ) ) {

@@ -169,18 +169,18 @@ class Environment {
 				$debug = true;
 				if ( defined( 'WP_DEBUG_LOG' ) ) {
 					if ( WP_DEBUG_LOG ) {
-						$opt[] = __( 'log', 'wp-plugin-boilerplate' );
+						$opt[] = esc_html__( 'log', 'wp-plugin-boilerplate' );
 					}
 				}
 				if ( defined( 'WP_DEBUG_DISPLAY' ) ) {
 					if ( WP_DEBUG_DISPLAY ) {
-						$opt[] = __( 'display', 'wp-plugin-boilerplate' );
+						$opt[] = esc_html__( 'display', 'wp-plugin-boilerplate' );
 					}
 				}
 				$s = implode( ', ', $opt );
 			}
 		}
-		return ( $debug ? __( 'Debug enabled', 'wp-plugin-boilerplate' ) . ( '' !== $s ? ' (' . $s . ')' : '' ) : __( 'Debug disabled', 'wp-plugin-boilerplate' ) );
+		return ( $debug ? esc_html__( 'Debug enabled', 'wp-plugin-boilerplate' ) . ( '' !== $s ? ' (' . $s . ')' : '' ) : esc_html__( 'Debug disabled', 'wp-plugin-boilerplate' ) );
 	}
 
 	/**
