@@ -87,6 +87,7 @@ class Core {
 		$this->loader->add_action( 'auto_update_plugin', $updater, 'auto_update_plugin', 10, 2 );
 		add_shortcode( 'wppb-changelog', [ $updater, 'sc_get_changelog' ] );
 		add_shortcode( 'wppb-libraries', [ $libraries, 'sc_get_list' ] );
+		add_shortcode( 'wppb-statistics', [ 'WPPluginBoilerplate\System\Statistics', 'sc_get_raw' ] );
 	}
 
 	/**
