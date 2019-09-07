@@ -30,7 +30,6 @@ use WPPluginBoilerplate\System\Nag;
  */
 class Core {
 
-
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -104,6 +103,8 @@ class Core {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'init_admin_menus' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'init_settings_sections' );
+		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( WPPB_PLUGIN_DIR . WPPB_SLUG . '.php' ), $plugin_admin, 'add_actions_links', 10, 4 );
+		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_row_meta', 10, 2 );
 		$this->loader->add_action( 'admin_notices', $nag, 'display' );
 		$this->loader->add_action( 'wp_ajax_hide_wppb_nag', $nag, 'hide_callback' );
 	}
