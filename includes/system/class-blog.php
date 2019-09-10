@@ -54,12 +54,18 @@ class Blog {
 	/**
 	 * Get a fully qualified blog name.
 	 *
-	 * @param   integer $id         Optional. The blog id.
+	 * @param   mixed $id         Optional. The blog id.
 	 * @return  string  The blog name if detected, $default otherwise.
 	 * @since   1.0.0
 	 */
 	public static function get_full_blog_name( $id = 0 ) {
-		return sprintf( '"%s" (blog ID %s)', self::get_blog_name( $id ), $id );
+		if ( is_numeric( $id ) ) {
+			return sprintf( '"%s" (blog ID %s)', self::get_blog_name( $id ), $id );
+		}
+		if ( 'WP_Site' === get_class( $id ) ) {
+			return sprintf( '"%s" (blog ID %s)', (string) $id->blogname, (int) $id->id );
+		}
+		return 'unknow blog';
 	}
 
 	/**

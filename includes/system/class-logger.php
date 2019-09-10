@@ -60,7 +60,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->emergency( (string) $message, (int) $code );
+		self::$logger->emergency( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->alert( (string) $message, (int) $code );
+		self::$logger->alert( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->critical( (string) $message, (int) $code );
+		self::$logger->critical( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->error( (string) $message, (int) $code );
+		self::$logger->error( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -120,7 +120,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->warning( (string) $message, (int) $code );
+		self::$logger->warning( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -134,7 +134,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->notice( (string) $message, (int) $code );
+		self::$logger->notice( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -148,7 +148,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->info( (string) $message, (int) $code );
+		self::$logger->info( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -163,7 +163,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->debug( (string) $message, (int) $code );
+		self::$logger->debug( (string) $message, [ 'code' => $code ] );
 	}
 
 	/**
@@ -178,7 +178,7 @@ class Logger {
 		if ( ! isset( self::$logger ) ) {
 			return;
 		}
-		self::$logger->log( $level, (string) $message, (int) $code );
+		self::$logger->log( $level, (string) $message, [ 'code' => $code ] );
 	}
 
 }
