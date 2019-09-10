@@ -52,6 +52,17 @@ class Blog {
 	}
 
 	/**
+	 * Get a fully qualified blog name.
+	 *
+	 * @param   integer $id         Optional. The blog id.
+	 * @return  string  The blog name if detected, $default otherwise.
+	 * @since   1.0.0
+	 */
+	public static function get_full_blog_name( $id = 0 ) {
+		return sprintf( '"%s" (blog ID %s)', self::get_blog_name( $id ), $id );
+	}
+
+	/**
 	 * Get the current blog id.
 	 *
 	 * @param   mixed $default    Optional. Default value to return if blog is not detected.
