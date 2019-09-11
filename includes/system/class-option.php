@@ -46,7 +46,7 @@ class Option {
 	}
 
 	/**
-	 * Get an option value.
+	 * Get an option value for a site.
 	 *
 	 * @param   string  $option     Option name. Expected to not be SQL-escaped.
 	 * @param   boolean $default    Optional. The default value if option doesn't exists.
@@ -55,7 +55,7 @@ class Option {
 	 * @return  mixed   The value of the option.
 	 * @since 1.0.0
 	 */
-	public static function get( $option, $default = null ) {
+	public static function site_get( $option, $default = null ) {
 		if ( array_key_exists( $option, self::$defaults ) ) {
 			$default = self::$defaults[ $option ];
 		}
@@ -63,7 +63,24 @@ class Option {
 	}
 
 	/**
-	 * Set an option value.
+	 * Get an option value for a network.
+	 *
+	 * @param   string  $option     Option name. Expected to not be SQL-escaped.
+	 * @param   boolean $default    Optional. The default value if option doesn't exists.
+	 *                              This default value is used only if $option is not present
+	 *                              in the $defaults array.
+	 * @return  mixed   The value of the option.
+	 * @since 1.0.0
+	 */
+	public static function network_get( $option, $default = null ) {
+		if ( array_key_exists( $option, self::$defaults ) ) {
+			$default = self::$defaults[ $option ];
+		}
+		return get_site_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $default );
+	}
+
+	/**
+	 * Set an option value for a site.
 	 *
 	 * @param string      $option   Option name. Expected to not be SQL-escaped.
 	 * @param mixed       $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
@@ -74,17 +91,29 @@ class Option {
 	 * @return boolean  False if value was not updated and true if value was updated.
 	 * @since 1.0.0
 	 */
-	public static function set( $option, $value, $autoload = null ) {
+	public static function site_set( $option, $value, $autoload = null ) {
 		return update_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $value, $autoload );
 	}
 
 	/**
-	 * Delete all options.
+	 * Set an option value for a network.
+	 *
+	 * @param string $option   Option name. Expected to not be SQL-escaped.
+	 * @param mixed  $value    Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+	 * @return boolean  False if value was not updated and true if value was updated.
+	 * @since 1.0.0
+	 */
+	public static function network_set( $option, $value ) {
+		return update_site_option( WPPB_PRODUCT_ABBREVIATION . '_' . $option, $value );
+	}
+
+	/**
+	 * Delete all options for a site.
 	 *
 	 * @return integer Number of deleted items.
 	 * @since 1.0.0
 	 */
-	public static function delete_all() {
+	public static function site_delete_all() {
 		global $wpdb;
 		$result = 0;
 		// phpcs:ignore
