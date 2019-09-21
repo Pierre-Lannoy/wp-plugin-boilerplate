@@ -9,6 +9,9 @@
 
 namespace WPPluginBoilerplate\System;
 
+use WPPluginBoilerplate\System\Environment;
+use WPPluginBoilerplate\System\UUID;
+
 /**
  * The class responsible to handle assets management.
  *
@@ -65,7 +68,15 @@ class Assets {
 			// phpcs:ignore
 			return wp_register_style( $handle, $file, $deps, null, $media );
 		} else {
-			return wp_register_style( $handle, $src . $file, $deps, WPPB_VERSION, $media );
+			if ( Environment::is_plugin_in_production_mode() ) {
+				$version = WPPB_VERSION;
+			} else {
+				$version = UUID::generate_unique_id( 20 );
+			}
+			if ( Environment::is_plugin_in_dev_mode() ) {
+				$file = str_replace( '.min', '', $file );
+			}
+			return wp_register_style( $handle, $src . $file, $deps, $version, $media );
 		}
 	}
 
@@ -92,7 +103,15 @@ class Assets {
 			// phpcs:ignore
 			return wp_register_script( $handle, $file, $deps, null, Option::site_get( 'script_in_footer' ) );
 		} else {
-			return wp_register_script( $handle, $src . $file, $deps, WPPB_VERSION, Option::site_get( 'script_in_footer' ) );
+			if ( Environment::is_plugin_in_production_mode() ) {
+				$version = WPPB_VERSION;
+			} else {
+				$version = UUID::generate_unique_id( 20 );
+			}
+			if ( Environment::is_plugin_in_dev_mode() ) {
+				$file = str_replace( '.min', '', $file );
+			}
+			return wp_register_script( $handle, $src . $file, $deps, $version, Option::site_get( 'script_in_footer' ) );
 		}
 	}
 
