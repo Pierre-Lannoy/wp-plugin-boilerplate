@@ -66,7 +66,7 @@ class Conversion {
 	 */
 	public static function data_shorten( $number, $precision = 2 ) {
 		$divisors = [
-			pow( 1024, 0 ) => '',
+			pow( 1024, 0 ) => esc_html_x( 'B', 'Abbreviation - Stands for "byte".', 'wp-plugin-boilerplate' ),
 			pow( 1024, 1 ) => esc_html_x( 'KB', 'Abbreviation - Stands for "kilobytes".', 'wp-plugin-boilerplate' ),
 			pow( 1024, 2 ) => esc_html_x( 'MB', 'Abbreviation - Stands for "megabytes".', 'wp-plugin-boilerplate' ),
 			pow( 1024, 3 ) => esc_html_x( 'GB', 'Abbreviation - Stands for "gigabytes".', 'wp-plugin-boilerplate' ),
