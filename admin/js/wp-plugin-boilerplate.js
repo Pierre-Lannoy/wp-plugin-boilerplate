@@ -1,3 +1,3 @@
-(function ($) {
-	'use strict';
-})( jQuery );
+jQuery(document).ready( function($) {
+	$('.wp-plugin-boilerplate-about-logo').css({opacity:1});
+} );
