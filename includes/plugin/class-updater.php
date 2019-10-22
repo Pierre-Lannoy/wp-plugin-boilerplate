@@ -12,6 +12,9 @@ namespace WPPluginBoilerplate\Plugin;
 use Parsedown;
 use WPPluginBoilerplate\System\Nag;
 use WPPluginBoilerplate\System\Option;
+use WPPluginBoilerplate\System\Role;
+use WPPluginBoilerplate\System\Logger;
+use WPPluginBoilerplate\System\Environment;
 use Exception;
 
 /**
@@ -32,8 +35,8 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$old = Option::site_get( 'version' );
-		if ( WPPB_VERSION !== $old ) {
+		$old = Option::network_get( 'version' );
+		if ( TRAFFIC_VERSION !== $old ) {
 			if ( '0.0.0' === $old ) {
 				$this->install();
 				// phpcs:ignore
@@ -41,10 +44,18 @@ class Updater {
 			} else {
 				$this->update( $old );
 				// phpcs:ignore
-				$message = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
+				$message  = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
+				Logger::notice( $message );
+				if ( ( Environment::is_wordpress_multisite() && Role::SUPER_ADMIN === Role::admin_type() ) || Role::SINGLE_ADMIN === Role::admin_type() ) {
+					// phpcs:ignore
+					$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), admin_url( 'options-general.php?page=wp-plugin-boilerplate-settings&tab=about' ) );
+				} else {
+					// phpcs:ignore
+					$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_URL . '/blob/master/CHANGELOG.md' );
+				}
 			}
 			Nag::add( 'update', 'info', $message );
-			Option::site_set( 'version', WPPB_VERSION );
+			Option::network_set( 'version', TRAFFIC_VERSION );
 		}
 	}
 
@@ -146,6 +157,7 @@ class Updater {
 				}
 			} catch ( Exception $e ) {
 				$result = esc_html( $error );
+				Logger::warning( $result );
 			}
 		}
 		return $result;
