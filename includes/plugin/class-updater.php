@@ -46,13 +46,8 @@ class Updater {
 				// phpcs:ignore
 				$message  = sprintf( esc_html__( '%1$s has been correctly updated from version %2$s to version %3$s.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_NAME, $old, WPPB_VERSION );
 				Logger::notice( $message );
-				if ( ( Environment::is_wordpress_multisite() && Role::SUPER_ADMIN === Role::admin_type() ) || Role::SINGLE_ADMIN === Role::admin_type() ) {
-					// phpcs:ignore
-					$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), admin_url( 'options-general.php?page=wp-plugin-boilerplate-settings&tab=about' ) );
-				} else {
-					// phpcs:ignore
-					$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), WPPB_PRODUCT_URL . '/blob/master/CHANGELOG.md' );
-				}
+				// phpcs:ignore
+				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), admin_url( 'options-general.php?page=wp-plugin-boilerplate-settings&tab=about' ) );
 			}
 			Nag::add( 'update', 'info', $message );
 			Option::network_set( 'version', TRAFFIC_VERSION );
