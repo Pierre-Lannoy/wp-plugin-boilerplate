@@ -89,9 +89,9 @@ class Date {
 	public static function get_age_array_from_seconds( $age, $legend = false, $abbrev = false ) {
 		if ( $abbrev ) {
 			$intervals = [
-				[ 60, _x( 'sec.', 'Abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ), _x( 'sec.', 'Abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ) ],
-				[ 60, _x( 'min.', 'Abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ), _x( 'min.', 'Abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ) ],
-				[ 100000, _x( 'hr.', 'Abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ), _x( 'hr.', 'Abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ) ],
+				[ 60, _x( 'sec', 'Unit abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ), _x( 'sec', 'Unit abbreviation - Stands for "second".', 'wp-plugin-boilerplate' ) ],
+				[ 60, _x( 'min', 'Unit abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ), _x( 'min', 'Unit abbreviation - Stands for "minute".', 'wp-plugin-boilerplate' ) ],
+				[ 100000, _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ), _x( 'hr', 'Unit abbreviation - Stands for "hour".', 'wp-plugin-boilerplate' ) ],
 			];
 		} else {
 			$intervals = [
