@@ -64,8 +64,6 @@ function wppb_uninstall() {
  * @since 1.0.0
  */
 function wppb_run() {
-	WPPluginBoilerplate\System\Logger::init();
-	WPPluginBoilerplate\System\Cache::init();
 	$plugin = new WPPluginBoilerplate\Plugin\Core();
 	$plugin->run();
 }

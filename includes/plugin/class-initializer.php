@@ -35,7 +35,8 @@ class Initializer {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
-
+		\WPPluginBoilerplate\System\Logger::init();
+		\WPPluginBoilerplate\System\Cache::init();
 	}
 
 }
