@@ -81,6 +81,7 @@ class Core {
 		$assets    = new Assets();
 		$updater   = new Updater();
 		$libraries = new Libraries();
+		$this->loader->add_filter( 'perfopsone_plugin_info', self::class, 'perfopsone_plugin_info' );
 		$this->loader->add_action( 'init', $bootstrap, 'initialize' );
 		$this->loader->add_action( 'wp_head', $assets, 'prefetch' );
 		$this->loader->add_action( 'auto_update_plugin', $updater, 'auto_update_plugin', 10, 2 );
@@ -139,6 +140,24 @@ class Core {
 	 */
 	public function get_loader() {
 		return $this->loader;
+	}
+
+	/**
+	 * Adds full plugin identification.
+	 *
+	 * @param array $plugin The already set identification information.
+	 * @return array The extended identification information.
+	 * @since 1.0.0
+	 */
+	public static function perfopsone_plugin_info( $plugin ) {
+		$plugin[ WPPB_SLUG ] = [
+			'name'    => WPPB_PRODUCT_NAME,
+			'code'    => WPPB_CODENAME,
+			'version' => WPPB_VERSION,
+			'url'     => WPPB_PRODUCT_URL,
+			'icon'    => self::get_base64_logo(),
+		];
+		return $plugin;
 	}
 
 	/**
