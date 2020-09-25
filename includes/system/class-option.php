@@ -41,7 +41,7 @@ class Option {
 		self::$defaults['download_favicons'] = false;
 		self::$defaults['script_in_footer']  = false;
 		self::$defaults['auto_update']       = true;
-		self::$defaults['display_nag']       = true;
+		self::$defaults['display_nag']       = false;
 		self::$defaults['nags']              = [];
 		self::$defaults['version']           = '0.0.0';
 	}
