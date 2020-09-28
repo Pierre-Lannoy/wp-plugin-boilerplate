@@ -9,7 +9,6 @@
 
 namespace WPPluginBoilerplate\Plugin;
 
-use Parsedown;
 use WPPluginBoilerplate\System\Nag;
 use WPPluginBoilerplate\System\Option;
 use WPPluginBoilerplate\System\Role;

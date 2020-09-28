@@ -64,23 +64,23 @@ class Libraries {
 			'base'    => WPPB_VENDOR_DIR . 'feather/',
 			'version' => '4.24.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'decalog' ), 'Cole Bemis' ),
+			'author'  => sprintf( esc_html__( '%s & contributors', 'wp-plugin-boilerplate' ), 'Cole Bemis' ),
 			'url'     => 'https://feathericons.com',
 			'license' => 'mit',
 			'langs'   => 'en',
 		];
-		self::$mono_libraries              = [];
-		self::$mono_libraries['parsedown'] = [
-			'name'    => 'Parsedown',
-			'detect'  => 'Parsedown',
-			'base'    => WPPB_VENDOR_DIR . 'parsedown/',
-			'version' => '1.8.0-beta-7',
+		self::$psr4_libraries['markdown'] = [
+			'name'    => 'Markdown Parser',
+			'prefix'  => 'cebe\markdownparser',
+			'base'    => WPPB_VENDOR_DIR . 'markdown/',
+			'version' => '1.2.1',
 			// phpcs:ignore
-			'author'  => sprintf( esc_html__( '%s & contributors', 'wp-plugin-boilerplate' ), 'Emanuil Rusev' ),
-			'url'     => 'https://parsedown.org',
+			'author'  => sprintf( esc_html__( '%s & contributors', 'wp-plugin-boilerplate' ), 'Carsten Brandt' ),
+			'url'     => 'https://github.com/cebe/markdown',
 			'license' => 'mit',
 			'langs'   => 'en',
 		];
+		self::$mono_libraries             = [];
 	}
 
 	/**
