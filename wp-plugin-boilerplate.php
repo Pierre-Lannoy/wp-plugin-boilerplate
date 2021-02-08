@@ -67,6 +67,8 @@ function wppb_uninstall() {
  */
 function wppb_run() {
 	$plugin = new WPPluginBoilerplate\Plugin\Core();
+	echo $aaaa;
+	$a = unserialize('');
 	$plugin->run();
 }
 
