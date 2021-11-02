@@ -36,6 +36,7 @@ class Updater {
 	 */
 	public function __construct() {
 		$old = Option::network_get( 'version' );
+		Option::network_set( 'version', TRAFFIC_VERSION );
 		if ( TRAFFIC_VERSION !== $old ) {
 			if ( '0.0.0' === $old ) {
 				$this->install();
@@ -50,7 +51,6 @@ class Updater {
 				$message .= ' ' . sprintf( __( 'See <a href="%s">what\'s new</a>.', 'wp-plugin-boilerplate' ), admin_url( 'options-general.php?page=wp-plugin-boilerplate-settings&tab=about' ) );
 			}
 			Nag::add( 'update', 'info', $message );
-			Option::network_set( 'version', TRAFFIC_VERSION );
 		}
 	}
 
