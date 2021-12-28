@@ -10,6 +10,8 @@
 
 namespace WPPluginBoilerplate\System;
 
+use WPPluginBoilerplate\System\Option;
+
 /**
  * The class responsible to handle cache management.
  *
@@ -195,8 +197,10 @@ class Cache {
 		$chrono    = microtime( true );
 		$item_name = self::normalized_item_name( $item_name );
 		$found     = false;
-		if ( self::$apcu_available ) {
+		if ( self::$apcu_available && Option::network_get( 'use_apcu', true ) ) {
 			$result = apcu_fetch( self::$pool_name . '_' . $item_name, $found );
+		} elseif ( wp_using_ext_object_cache() ) {
+			$result = wp_cache_get( $item_name, self::$pool_name, false, $found );
 		} else {
 			$result = get_transient( self::$pool_name . '_' . $item_name );
 			$found  = false !== $result;
@@ -286,8 +290,10 @@ class Cache {
 			$expiration = (int) $ttl;
 		}
 		if ( $expiration > 0 ) {
-			if ( self::$apcu_available ) {
+			if ( self::$apcu_available && Option::network_get( 'use_apcu', true ) ) {
 				$result = apcu_store( self::$pool_name . '_' . $item_name, $value, $expiration );
+			}  elseif ( wp_using_ext_object_cache() ) {
+				$result = wp_cache_set( $item_name, $value, self::$pool_name, $expiration );
 			} else {
 				$result = set_transient( self::$pool_name . '_' . $item_name, $value, $expiration );
 			}
@@ -376,11 +382,18 @@ class Cache {
 	private static function delete_for_ful_name( $item_name ) {
 		$item_name = self::normalized_item_name( $item_name );
 		$result    = 0;
-		if ( self::$apcu_available ) {
+		if ( self::$apcu_available && Option::network_get( 'use_apcu', true ) ) {
 			if ( strlen( $item_name ) - 1 === strpos( $item_name, '_*' ) ) {
 				return false;
 			} else {
 				return apcu_delete( self::$pool_name . '_' . $item_name );
+			}
+		}
+		if ( wp_using_ext_object_cache() ) {
+			if ( strlen( $item_name ) - 1 === strpos( $item_name, '_*' ) ) {
+				return false;
+			} else {
+				return wp_cache_delete( $item_name, self::$pool_name );
 			}
 		}
 		global $wpdb;
@@ -423,8 +436,11 @@ class Cache {
 					}
 				} catch ( \Throwable $e ) {
 					Logger::error( sprintf( 'Unable to query APCu status: %s.', $e->getMessage() ), $e->getCode() );
+					$result = 0;
 				}
 			}
+		} elseif ( wp_using_ext_object_cache() ) {
+			$result = 0;
 		} else {
 			$result = self::delete_global( '/*' );
 		}
